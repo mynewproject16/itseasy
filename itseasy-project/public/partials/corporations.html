@@ -1,0 +1,18 @@
+<div class="tabs">
+  <ul id="tabs" class="nav nav-tabs" role="tablist">
+    <li class="col-xs-12 col-sm-6 active"><a ng-click="getAllCorps()"href="#corp_table" aria-controls="corp_table" role="tab" data-toggle="tab">Corporations Table</a></li>
+    <li class="col-xs-12 col-sm-6"><a ng-click="editClicked('corp', $event)" href="#corp_details" aria-controls="corp_details" role="tab">Corporations Details</a></li>
+  </ul>
+  <!-- TAB CONTENT -->
+  <div class="tab-content">
+    <!--CORPORATIONS TABLE-->
+    <div role="tabpanel" class="tab-pane fade in active" id="corp_table">
+      <ng-include src="'/partials/corps-table.html'"></ng-include>
+    </div>
+    <!--CORPORATION DETAILS-->
+    <div role="tabpanel" class="tab-pane fade" id="corp_details">
+      <!--FORM-->
+      <ng-include src="'/partials/corp-details.html'"></ng-include>
+    </div>
+  </div>
+</div>

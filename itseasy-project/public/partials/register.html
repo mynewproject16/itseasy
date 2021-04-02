@@ -1,0 +1,163 @@
+
+    <div class="tabs" >
+        <!-- TAB BUTTONS -->
+        <!-- TAB BUTTONS -->
+        <ul id="tabs" class="nav nav-tabs" role="tablist">
+          <li class="col-xs-12 col-sm-6 active"><a ng-click="getAllUsers()" href="#manage_users" aria-controls="manage_users" role="tab" data-toggle="tab"> Users Table</a></li>
+          <li class="col-xs-12 col-sm-6"><a ng-click="editUser('user', $event)" href="#register"  aria-controls="register" ng-disabled="!current_user._id" role="tab"> Users Detail</a></li>
+  
+        </ul>
+        <!-- TAB CONTENT -->
+        <div class="tab-content" >
+          <!--JOBS TABLE-->
+          <div role="tabpanel" class="tab-pane fade in active" id="manage_users"  >
+            <div class="text-center btn_container">
+              <button class="btn_red_invert" ng-click="registerClicked()" type="button">add user</button>
+              <button class="btn_red_invert" id="editUser" ng-click="editUser('user', $event)" href="#register" aria-controls="register" ng-disabled="!current_user._id" type="button">edit user</button>
+              <button class="btn_red_invert" id="deleteUser" ng-disabled="!current_user._id" ng-click="deleteClicked('user')" type="button">delete user</button>
+  
+            </div>
+           
+            <div class="row">
+              <div class="pull-left entries_nbr">Showing <span>{{pageSizeSelected.name}}</span> of <span>{{getusersCount}}</span> entries</div>
+              <nav class="pull-right">
+                <!-- <ul class="pager">
+                  <li><a ng-class="{'disabled' : !tables.users.has_prev_data}" ng-click="pageChanged('users', 'prev')" href="#"><i class="iconL-Left-2"></i> Prev</a></li>
+                  <li><a ng-class="{'disabled' : !tables.users.has_next_data}" ng-click="pageChanged('users', 'next')" href="#">Next <i class="iconL-Right-2"></i></a></li>
+                </ul> -->
+                <ul class="pager">
+                  <li><a id="prevBtn" ng-class="{'disabled' :true}" ng-click="pageChanged('users', 'prev')" href="#"><i class="iconL-Left-2"></i> Prev</a></li>
+                  <li><a id="nextBtn" ng-click="pageChanged('users', 'next')" href="#">Next <i class="iconL-Right-2"></i></a></li>
+                </ul>
+                <div class="text-right entries_container">
+                  show
+                  <!-- <select name="entries" id="entries" ng-model="tables.users.items_per_page" ng-change="pageChanged('users')" number-model-to-string>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                  </select> -->
+                  <select name="category-group" id="categoryGroup" ng-model="pageSizeSelected" ng-change="onPageSizeChange(pageSizeSelected)"                                         ng-change="onCategoryChange(itemSelected)" 
+                  ng-options="pagesize.name  for pagesize in ChangePageSize">
+             
+              </select>
+                  entries
+                </div>
+              </nav>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>  <th>
+                   
+                    USER NAME</th>
+                    <th>EMAIL</th>
+                    <th>PHONE</th>
+                    <th>STATUS</th>
+                    <th>ROLE</th>
+                    <!--<th>DATE RETURN</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="user in tables.users.current_page_data" ng-click="select('user', $index)" ng-class="(user._id==current_user._id || user.selected == true) ? 'selected' : ''">
+                    <td>
+                      <input name="select_check" id="{{'select_check_' + $index}}" ng-model="tables.users.current_page_data[$index].selected" type="checkbox" />
+                      <label for="{{'select_check_' + $index}}">
+                        <span>
+                                </span>
+                      </label> {{user.name ? user.name : '/'}}</td>
+                    <td>{{user.email ? user.email : '/'}}</td>
+                    <td>{{user.phone ? user.phone : '/'}}</td>
+                    <td>{{user.status ? user.status : '/'}}</td>
+                    <td>{{user.role ? user.role : '/'}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              
+            </div>
+          </div>
+          
+            <div role="tabpanel" class="tab-pane fade "  id="register" >
+             
+  
+              <form  class="job_form">
+                <div class="row">
+                  <div class="col-xs-12 col-md-3">
+                    <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" ng-model="current_user.name"  placeholder="Enter User Full Name" class="form-control"/>
+  
+                  </div>
+                  <div class="form-group">
+                    <label>Status</label>
+                    <input class="form-control" list="job-status" name="userStatus" placeholder="Select Status" ng-model="current_user.status" tabindex="5">
+                    <datalist id="job-status" ng-model="current_user.status">
+                      <option >Active</option>
+                      <option >Deactive</option>
+                      
+                    </datalist>
+                  </div>
+  
+                   
+                  </div>
+                  <!--SECOND ROW RADIO-->
+                  <div class="col-xs-12 col-md-3">
+                   <div class="form-group">
+                    <label> Email</label>
+                    <input type="email" ng-model="current_user.email" name="emailUser" placeholder="Enter Email Id" class="form-control"/>
+                   
+                  </div>
+                  <div class="form-group">
+                    <label>Role</label>
+                    <input class="form-control" list="job-role" placeholder="Select Any Role" name="userRole" ng-model="current_user.role" tabindex="5">
+                    <datalist id="job-role" ng-model="current_user.role">
+                      <option >Admin</option>
+                      <option >Partner</option>
+                      <option >Employee</option>
+                      <option >User</option>
+                      <option >Guest User</option>
+                       </datalist>
+                  </div>
+  
+  
+                  </div>
+                  <!--THIRD ROW RADIO-->
+                  <div class="col-xs-12 col-md-3">
+                    <div class="form-group">
+                      <label>Password</label>
+                      <input type="password" name="userPassword" ng-model="current_user.password"  placeholder="Enter password in CamelCase" class="form-control"/>
+                     </div>
+                  
+                  </div>
+                  <!--FOURTH ROW RADIO-->
+                  <div class="col-xs-12 col-md-3">
+                 
+                   
+                     
+                    <div class="form-group">
+                      <label>Phone</label>
+                      <input type="number" name="phoneNum" ng-model="current_user.phone"  placeholder="Enter Phone Number" class="form-control"/>
+                     
+                    </div>
+                    
+                
+                </div>
+             
+                <div class="clearfix"></div>
+                <div class="text-center">
+                  <button type="submit" ng-click="registerContact('user',current_user)" ng-if="!showUpdate" class="btn_red">{{ isBusy ? 'Saving' : 'Save' }}</button>
+                  <button type="submit" ng-click="updateUserContact('user',current_user)"ng-if="showUpdate"  ng-disabled="!current_user._id" class="btn_red">{{ isBusy ? 'Saving' : 'Update' }}</button>
+  
+        
+                </div>
+              </form>
+  
+   
+            
+  
+  
+  
+              
+             
+          </div>
+          </div>

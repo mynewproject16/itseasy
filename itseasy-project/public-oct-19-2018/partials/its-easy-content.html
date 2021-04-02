@@ -1,0 +1,11 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="jobs_wrapper">
+      <ng-include ng-if="activeView === 'dealers'" src="'/partials/dealers.html'"></ng-include>
+      <ng-include ng-if="activeView === 'jobs'" src="'/partials/jobs.html'"></ng-include>
+      <ng-include ng-if="activeView === 'corps'" src="'/partials/corporations.html'"></ng-include>
+    </div>
+  </div>
+</div>
+<ng-include src="'/partials/get-user.html'"></ng-include>
+<ng-include src="'/partials/print-sheet.html'"></ng-include>

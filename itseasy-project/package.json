@@ -1,0 +1,37 @@
+{
+  "name": "MEAN_Test",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node itseasy-start.js"
+  },
+  "devDependencies": {
+    "grunt": "^1.1.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-cssmin": "^2.2.0",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-uglify": "^3.0.1"
+  },
+  "dependencies": {
+    "async": "^2.4.1",
+    "bcrypt-nodejs": "0.0.3",
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.17.2",
+    "child_process": "^1.0.2",
+    "debug": "^3.1.0",
+    "express": "^4.15.3",
+    "express-session": "^1.15.3",
+    "fs-extra": "^4.0.0",
+    "http": "0.0.0",
+    "iconv": "^3.0.0",
+    "method-override": "^2.3.9",
+    "moment": "^2.24.0",
+    "mongoose": "^4.10.0",
+    "mongoose-timestamp": "^0.6.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^4.0.0",
+    "path": "^0.12.7",
+    "pdffiller": "latest"
+  }
+}

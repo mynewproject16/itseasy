@@ -1,0 +1,80 @@
+<form class="job_form" ng-submit="formSubmitted('job')">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group date">
+        <label>Date</label>
+        <input type="text" format-date-model ng-model="current_job.date" uib-datepicker-popup="{{dateFormat}}" is-open="jobDatePickers.date.opened" datepicker-options="dateOptions" class="form-control" placeholder="MM/DD/YYYY" close-text="Close" />
+        <button type="button" class="date_picker" ng-click="openDatePicker('date')"><i class="glyphicon glyphicon-calendar"></i></button>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label>Created by</label>
+        <input type="text" ng-model="current_job.created_by" class="form-control" disabled />
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label>State</label>
+        <select class="form-control" ng-init="current_job.state" ng-model="current_job.state">
+          <option value="CT">CT</option>
+          <option value="NJ">NJ</option>
+          <option value="NY">NY</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label>Vin</label>
+        <input type="text" class="form-control" placeholder="" ng-model="current_job.vehicle_vin">
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label>First name</label>
+        <input type="text" class="form-control" ng-model="current_job.primary_first_name" />
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label>Last name</label>
+        <input type="text" class="form-control" ng-model="current_job.primary_last_name" />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group form_radio">
+        <label>Lease/Buy</label>
+        <div class="radio_cont">
+          <input name="lease_buy" id="lease" type="radio" value="lease" ng-model="current_job.lease_or_buy" />
+          <label for="lease"><span></span>Lease</label>
+          <input name="lease_buy" id="buy" type="radio" value="buy" ng-model="current_job.lease_or_buy" />
+          <label for="buy"><span></span>Buy</label>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label>Dealer</label>
+        <select class="form-control" ng-model="current_job.dealer_id">
+          <option ng-repeat="dealer in dealers" value={{dealer._id}}>{{dealer.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label>Lessor</label>
+        <select class="form-control" ng-init="current_job.lessor_id" ng-model="current_job.lessor_id">
+          <option ng-repeat="dealer in corps" id={{lessor_id}}>{{lessor.name}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="text-center">
+    <button type="submit" class="btn_red">{{ isBusy ? 'Saving' : 'Save' }}</button>
+  </div>
+</form>

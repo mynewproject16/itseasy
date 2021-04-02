@@ -1,0 +1,830 @@
+@import "../css/styleLine.css";
+@import "../css/styleSolid.css";
+@import "../css/bootstrap.css";
+
+
+/////////////////COLORS
+$red: #dd2025;
+$light_red: #f4eaeb;
+$gray_text_head: #525151;
+$gray_border: #979696;
+$placeholder: #d1cfcf;
+$footer: #1e1e1e;
+
+
+
+
+////////////////MIXIN
+
+@mixin transition($args){
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+@mixin transform($args) {
+  -webkit-transform: $args;
+  -ms-transform: $args;
+  -moz-transform: $args;
+  -o-transform: $args;
+  transform: $args;
+}
+
+@mixin placeholder {
+  &::-webkit-input-placeholder {
+    @content
+  }
+  &:-moz-placeholder {
+    @content
+  }
+  &::-moz-placeholder {
+    @content
+  }
+  &:-ms-input-placeholder {
+    @content
+  }
+
+}
+
+
+
+
+
+
+
+
+//FONTS
+
+body,
+html{
+  font-family: 'News Cycle', sans-serif;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////////MAIN NAV
+
+
+.header_container {
+  min-height: 150px;
+  background: transparent url("../images/header.jpg") no-repeat center;
+  background-size: cover;
+  padding: 30px 0 0 0;
+  width: 100%;
+  z-index: 10;
+  position: fixed;
+  @include transition(all 0.2s ease);
+
+  ul {
+    @include transition(all 0.2s ease);
+    overflow: hidden;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: 10px auto 0 auto;
+    text-align: center;
+    li {
+      float: left;
+      margin: 0;
+      display: inline-block;
+      text-decoration: none;
+      text-align: center;
+      width: auto;
+      position: relative;
+      @include transition(all 0.3s ease);
+
+      a.active{
+        border-bottom: 2px solid $red;
+        color:$red;
+      }
+
+      a {
+        &:first-child{
+          //padding-left:0;
+        }
+        border-bottom: 2px solid transparent;
+        font-weight: 500;
+        text-transform: uppercase;
+        line-height: 40px;
+        font-size: 13px;
+        display: inline-block;
+        width: auto;
+        color: #fff;
+        padding:0 25px;
+        border-bottom: 1px solid transparent;
+        @include transition(all 0.2s ease);
+
+        &:visited {
+          text-decoration: none;
+        }
+
+        &:active {
+          text-decoration: none;
+        }
+
+        &:focus {
+          text-decoration: none;
+        }
+
+        &:hover {
+          @include transition(all 0.3s ease);
+          border-bottom: 2px solid $red;
+          text-decoration: none;
+          color:$red;
+        }
+
+        i{
+          font-size: 20px;
+          display: block;
+        }
+
+      }
+
+    }
+  }
+}
+
+.header_container.header_fixed{
+  min-height: 70px;
+  height: 70px;
+  padding: 8px 0 0 0;
+
+  ul{
+    margin: 20px auto 0 auto;
+  }
+
+  .logo_nav{
+    height: 55px;
+    line-height: 55px;
+    img{
+      height: 55px;
+    }
+  }
+
+  .jobs_wrapper{
+    opacity: 0;
+  }
+
+}
+
+
+.logo_nav{
+  @include transition(all 0.2s ease);
+  width: 260px;
+  font-weight: 700;
+  color: #fff;
+  font-size: 16px;
+  margin-left: 20px;
+  height: 70px;
+  line-height: 70px;
+  &:hover{
+    color: #fff;
+    text-decoration: none;
+  }
+  img{
+    @include transition(all 0.2s ease);
+    height: 70px;
+    float: left;
+    margin: 0 20px;
+  }
+}
+
+.menu_button{
+  z-index: 1000;
+  cursor: pointer;
+  position: absolute;
+  margin-top: 0;
+  margin-left: 20px;
+  width: 36px;
+  height: 50px;
+  background: $red;
+}
+
+.menu_button span,
+.menu_button span:before,
+.menu_button span:after {
+  cursor: pointer;
+  border-radius: 1px;
+  height: 2px;
+  width: 26px;
+  background: #fff;
+  position: absolute;
+  display: block;
+  content: '';
+}
+.menu_button span{
+  top:18px;
+  left: 5px;
+}
+
+.menu_button span:before {
+  top: 6px;
+  margin-left: 0;
+}
+.menu_button span:after {
+  top: 12px;
+  width: 26px;
+  margin-left: 0;
+}
+
+
+.menu_button span,
+.menu_button span:before,
+.menu_button span:after {
+  @include transition(all 0.3s ease-in-out);
+}
+.menu_button.menu-opened span {
+  background-color: transparent;
+}
+.menu_button.menu-opened span:before,
+.menu_button.menu-opened span:after {
+  top:6px;
+}
+.menu_button.menu-opened span:before {
+  transform: rotate(45deg);
+}
+.menu_button.menu-opened span:after {
+  transform: rotate(-45deg);
+  width: 26px;
+}
+
+.main_title{
+  pointer-events: none;
+  margin: 40px 0;
+  font-weight: 700;
+  font-size: 30px;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+
+
+
+///////////////////JOBS CONTENT
+
+
+.jobs_wrapper{
+  padding:0 80px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+
+.job_tabs{
+  min-height: 400px;
+  margin-top: 250px;
+  padding-bottom: 100px;
+
+  .nav-tabs {
+    border-bottom: 1px solid $red;
+  }
+
+  .nav-tabs > li {
+    padding: 0;
+  }
+
+  .nav-tabs > li > a {
+    padding: 12px 15px;
+    font-size: 16px;
+    @include transition(all 0.2s ease);
+    margin-right: 1px;
+    border: none;
+    border-radius: 0;
+    color: $red;
+    text-transform: uppercase;
+    text-align: center;
+    text-shadow: none;
+    font-weight: 700;
+    &:hover{
+      color: #fff;
+      background-color: $red;
+    }
+  }
+
+  .nav-tabs > li.active > a,
+  .nav-tabs > li.active > a:hover,
+  .nav-tabs > li.active > a:focus {
+    color: #fff;
+    background-color: $red;
+    border: none;
+    cursor: pointer;
+    outline: none;
+  }
+
+}
+
+.tab-content{
+  margin-top: 60px;
+
+  .table{
+    margin-bottom: 7px;
+  }
+
+  .table > thead > tr > th,
+  .table > tbody > tr > td {
+    text-align: center;
+    font-size: 14px;
+    padding: 12px 8px;
+  }
+
+  .table > thead > tr > th{
+    border: none;
+  }
+
+  .table > tbody > tr{
+    position: relative;
+  }
+
+  .table > tbody > tr > td{
+    border-top: none;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .table_checkbox{
+    //position: absolute;
+    margin-left:-20px;
+    top:0;
+  }
+
+  //.table > tbody > tr:first-child > td{
+  //  border: none;
+  //}
+
+  .table > thead{
+    background-color: $light_red;
+    color: $gray_text_head;
+  }
+
+  .table-hover > tbody > tr:hover {
+    background-color: $light_red;
+    color: $red;
+    cursor: pointer;
+  }
+
+}
+
+.search_block{
+  overflow: hidden;
+  &:after{
+    content: '';
+    display: block;
+    clear: both;
+  }
+  .input_container{
+    height: 42px;
+    margin: 20px 0 40px 0;
+    text-align: justify;
+    &:after{
+      content:' ';
+      display:inline-block;
+      width: 100%;
+      height: 0
+    }
+    input{
+      color: darken($gray_border, 30%);
+      border: 1px solid $gray_border;
+      outline: none;
+      padding: 10px 0;
+      display: inline-block;
+      margin: 0;
+      text-indent: 10px;
+      &:focus,
+      &:active{
+        border: 1px solid $red;
+        outline: none;
+        box-shadow: none;
+        //outline: none;
+      }
+      @include placeholder{
+        color: $gray_border;
+      }
+    }
+  }
+  .btn_red{
+    width: 180px;
+  }
+
+
+  .pager{
+    margin: 0;
+    li > a{
+      padding: 0 10px;
+      height: 40px;
+      line-height: 40px;
+      background-color: #ffffff;
+      border: 1px solid $red;
+      color: $red;
+      border-radius: 0;
+      text-transform: uppercase;
+      font-size: 13px;
+    }
+  }
+
+  &.dealership{
+    input{
+      width: 19%;
+    }
+  }
+  &.corporation{
+    input{
+      width: 14%;
+    }
+  }
+}
+
+.entries_nbr{
+  text-transform: uppercase;
+  color: $gray_border;
+  span{
+    font-weight: 700;
+  }
+}
+
+.btn_red,
+.btn_red_invert{
+  @include transition(all 0.2s ease-in-out);
+  background-color: $red;
+  color: #fff;
+  border: 1px solid $red;
+  box-shadow: none;
+  outline:none;
+  padding: 0 20px;
+  font-size: 13px;
+  height: 40px;
+  line-height: 40px;
+  text-transform: uppercase;
+  min-width: 150px;
+  letter-spacing: 1px;
+  font-weight: 700;
+  text-align: center;
+  i{
+    margin-right: 10px;
+    top:2px;
+  }
+  &:hover,
+  &:active{
+    background-color: #fff;
+    color: $red;
+  }
+}
+
+.btn_red_invert{
+  background-color: #fff;
+  color: $red;
+  &:hover,
+  &:active{
+    background-color: $red;
+    color: #fff;
+  }
+}
+
+.btn_container{
+  margin: 40px 0;
+  button{
+    margin: 0 10px;
+  }
+}
+
+.entries_container{
+  text-transform: uppercase;
+  margin: 10px 0;
+  select{
+    &:active,
+    &:focus{
+      box-shadow: none;
+      border: 1px solid $red;
+      outline: none;
+    }
+  }
+}
+
+.btn_search{
+  margin-top: 20px;
+  margin-left: 160px;
+}
+
+
+//BACK TO TOP BUTTON
+
+
+.back_to_top {
+  position: fixed;
+  right: 0;
+  bottom: 70px;
+  z-index: 10;
+  width: 45px;
+  height: 40px;
+  opacity: 0;
+  pointer-events: none;
+  @include transition(all 0.2s ease);
+  a{
+    display: block;
+    height: 40px;
+    width: 45px;
+    text-align: center;
+    background-color: $red;
+    color: #fff;
+    &:visited,
+    &:active,
+    &:focus,
+    &:hover{
+      text-decoration: none;
+    }
+    i{
+      color: #fff;
+      font-size: 22px;
+      line-height: 40px;
+    }
+  }
+  &.active{
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+}
+
+
+
+//FOOTER
+
+.jobs_footer{
+  line-height: 60px;
+  text-align: center;
+  background-color: $footer;
+  color: #fff;
+  min-height: 100px;
+  padding: 50px 0;
+  .logo_footer{
+    line-height: 60px;
+    display: inline-block;
+    img{
+      width: 60px;
+      height: 60px;
+      float: left;
+      margin-right: 20px;
+    }
+  }
+a{
+  //line-height: 27px;
+  color: #fff;
+  text-decoration: none;
+  &:hover,
+  &:visited,
+  &:active{
+    text-decoration: none;
+    color: #fff;
+  }
+  span{
+    vertical-align: bottom;
+    font-size: 140%;
+  }
+}
+  ul{
+    display: inline-block;
+    list-style-type: none;
+    li{
+      text-decoration: none;
+      display: inline-block;
+      text-transform: uppercase;
+      margin-right: 20px;
+      font-size: 12px;
+      i{
+        font-size: 14px;
+        margin-right: 10px;
+      }
+    }
+  }
+
+}
+
+
+///////////////////JOB DETAILS
+
+
+#job_details{
+  width: 100%;
+  height: 45px;
+  border-bottom: none;
+  background-color: $light_red;
+  padding: 0;
+  margin: 0;
+  display: table;
+  li{
+    border: none;
+    text-align: center;
+    //height: 45px;
+    //line-height: 45px;
+    float: none;
+    display: table-cell;
+    &.active,
+    &:hover{
+      a{
+        color: #fff;
+      }
+    }
+    a{
+      padding: 0;
+      height: 45px;
+      line-height: 45px;
+      letter-spacing: 1px;
+      color: $gray_text_head;
+      font-size: 12px;
+      display: inline-block;
+      width: 100%;
+    }
+  }
+
+}
+
+
+//FORM
+
+.job_form{
+  padding: 0 120px;
+  .form-group{
+    margin-bottom: 30px;
+    label{
+      text-transform: uppercase;
+      font-size: 12px;
+      color: $gray_text_head;
+    }
+    .form-control{
+      text-transform: uppercase;
+      font-size: 12px;
+      height: 40px;
+      color: $gray_text_head;
+      border-radius: 0;
+      border: 1px solid $gray_border;
+      &:focus,
+      &:active{
+        border: 1px solid $red;
+        box-shadow: none;
+        outline: none;
+      }
+      @include placeholder{
+        text-transform: uppercase;
+        color: $placeholder;
+      }
+
+    }
+
+    input[type="radio"] {
+      display:none;
+    }
+    input[type="radio"] + label {
+     width: 110px;
+    }
+    input[type="radio"] + label span {
+      float: left;
+      margin: 12px 10px 0 0;
+      display:inline-block;
+      width:16px;
+      height:16px;
+      outline: 1px solid $gray_border;
+      border: 3px solid transparent;
+    }
+
+    input[type="radio"]:checked + label span{
+      outline: 1px solid $gray_border;
+      border: 3px solid #fff;
+      background-color: $red;
+    }
+
+    .radio_cont{
+      padding: 0 10px 0 20px;
+      line-height: 40px;
+      height:40px;
+      border-right: 1px solid $gray_border;
+      label:first-child{
+        float: left;
+      }
+      label:last-child{
+        float: right;
+      }
+
+    }
+
+  }
+
+  .form_radio label:first-child{
+    margin-left: 20px;
+  }
+
+  textarea.form-control{
+    height: 80px!important;
+    resize: none;
+  }
+
+}
+
+.pl_20{
+  padding-left: 20px;
+}
+
+
+
+////////////////EPA TAB
+
+.one_line{
+  height: 50px;
+  line-height: 50px;
+  label:first-child{
+    margin-left: 0!important;
+  }
+ .radio_cont{
+   height: 50px!important;
+   line-height: 50px!important;
+   width: 100%;
+   float: right;
+   padding: 0;
+ }
+  &:after{
+    content: '';
+    clear: both;
+    display: block;
+  }
+}
+
+.pr0{
+  padding-right: 0;
+}
+
+
+
+////////////////FORMS TAB
+
+.buttons_row{
+  margin: 30px 0;
+  text-align: center;
+}
+
+
+
+///////////////////////WEB MAX WIDTH 1500px
+
+@media (max-width: 1500px) {
+  .jobs_wrapper {
+    padding: 0 40px;
+  }
+
+}
+
+
+///////////////////////WEB MAX WIDTH 1400px
+
+@media (max-width: 1400px) {
+  .jobs_wrapper {
+    padding: 0 20px;
+  }
+
+  .job_form {
+    padding: 0 80px;
+  }
+
+}
+
+
+///////////////////////WEB MAX WIDTH 1300px
+
+@media (max-width: 1300px) {
+  .jobs_wrapper {
+    padding: 0 15px;
+  }
+
+  .job_form {
+    padding: 0 40px;
+  }
+
+}
+
+
+///////////////////////WEB MAX WIDTH 1200px
+
+@media (max-width: 1199px) {
+  .job_form {
+    padding: 0;
+  }
+
+  .job_form .form-group .radio_cont {
+    padding: 0 10px;
+  }
+
+  .job_form .form-group.pl_20 {
+    padding-left: 10px;
+  }
+
+  .job_form .form_radio label:first-child {
+    margin-left: 10px;
+  }
+
+}

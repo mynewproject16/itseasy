@@ -1,0 +1,20 @@
+<div class="tabs">
+  <!-- TAB BUTTONS -->
+  <!-- TAB BUTTONS -->
+  <ul id="tabs" class="nav nav-tabs" role="tablist">
+    <li class="col-xs-12 col-sm-6 active"><a href="#dealerships_table" aria-controls="dealerships_table" role="tab" data-toggle="tab">Dealerships Table</a></li>
+    <li class="col-xs-12 col-sm-6"><a ng-click="editClicked('dealer', $event)" href="#dealer_details" aria-controls="dealer_details" role="tab">Dealership Details</a></li>
+  </ul>
+  <!-- TAB CONTENT -->
+  <div class="tab-content">
+    <!--DEALERSHIPS TABLE-->
+    <div role="tabpanel" class="tab-pane fade in active" id="dealerships_table">
+      <ng-include src="'/partials/dealers-table.html'"></ng-include>
+    </div>
+    <!--DEALERSHIP DETAILS-->
+    <div role="tabpanel" class="tab-pane fade" id="dealer_details">
+      <!--FORM-->
+      <ng-include src="'/partials/dealer-details.html'"></ng-include>
+    </div>
+  </div>
+</div>

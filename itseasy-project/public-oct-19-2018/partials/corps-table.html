@@ -1,0 +1,72 @@
+<div class="text-center btn_container">
+  <button class="btn_red_invert" ng-click="addClicked('corp')" type="button">Add Corporation</button>
+  <button class="btn_red_invert" ng-click="editClicked('corp')" ng-disabled="!current_corp._id" type="button">Edit Corporation</button>
+  <button class="btn_red_invert" ng-disabled="!current_corp._id" ng-click="deleteClicked('corp')" type="button">Delete Corporation</button>
+  <button class="btn_red btn_search" type="button" ng-click="filterTable('corps')"><i class="glyphicon glyphicon-search" aria-hidden="true"></i>search</button>
+  <button class="btn_red_invert m-l-20 btn_clear" type="button" ng-click="clearFilter()"><i class="glyphicon glyphicon-search" aria-hidden="true"></i>clear search</button>
+</div>
+<div class="search_block corporation">
+  <div class="input_container">
+    <input placeholder="search by name" type="text" ng-model="search.name">
+    <input placeholder="search by corp code" type="text" ng-model="search.corp_code">
+    <input placeholder="search by city" type="text" ng-model="search.city">
+    <input placeholder="search by state" type="text" ng-model="search.state">
+    <input placeholder="search by zip" type="text" ng-model="search.zip">
+    <input placeholder="search by fed tax ID" type="text" ng-model="search.fed_tax_id">
+  </div>
+</div>
+<div class="row">
+  <div class="pull-left entries_nbr">Showing <span>{{tables.corps.items_per_page}}</span> of <span>{{tables.corps.total_items}}</span> entries</div>
+  <nav class="pull-right">
+    <ul class="pager">
+      <li><a ng-class="{'disabled' : !tables.corps.has_prev_data}" ng-click="pageChanged('corps', 'prev')" href="#"><i class="iconL-Left-2"></i> Prev</a></li>
+      <li><a ng-class="{'disabled' : !tables.corps.has_next_data}" ng-click="pageChanged('corps', 'next')" href="#">Next <i class="iconL-Right-2"></i></a></li>
+    </ul>
+    <div class="text-right entries_container">
+      show
+      <select name="entries" id="entries" ng-model="tables.corps.items_per_page" ng-change="pageChanged('corps')" number-model-to-string>
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+      </select>
+      entries
+    </div>
+  </nav>
+</div>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>
+          <input name="select_check" id="select_all_corps" ng-model="all_selected.corps" ng-true-value="true" ng-false-value="false" type="checkbox" ng-change="selectAll('corps');" />
+          <label for="select_all_corps"><span></span></label>
+          Name
+        </th>
+        <th>Corp code</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Zip</th>
+        <th>Fed tax ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="corp in tables.corps.current_page_data" ng-click="select('corp', $index)" ng-class="(corp._id==current_corp._id) || corp.selected == true ? 'selected' : ''">
+        <td>
+          <input name="select_check" id="{{'select_check_' + $index}}" type="checkbox" ng-model="tables.corps.current_page_data[$index].selected" />
+          <label for="{{'select_check_' + $index}}">
+            <span>
+                                    </span>
+          </label>
+          {{corp.name ? corp.name : '/'}}</td>
+        <td>{{corp.corp_code ? corp.corp_code : '/'}}</td>
+        <td>{{ (!corp.address1 && !corp.address2 ? '/' : corp.address1 + ' ' + corp.address2 ) }}</td>
+        <td>{{corp.city ? corp.city : '/'}}</td>
+        <td>{{corp.state ? corp.state : '/'}}</td>
+        <td>{{corp.zip ? corp.zip : '/'}}</td>
+        <td>{{corp.fed_tax_id ? corp.fed_tax_id : '/'}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,45 @@
+<header class="container-fluid header_container">
+    <a class="hidden-lg menu_button menu sb-toggle-left" href="#"><span></span></a>
+    <a class="logo_nav pull-left" href="index.html">
+      <!--<img class="img-responsive" src="/images/logo.png" alt="logo"> -->
+      <span>ItsEasy <span>Passport & Visa</span></span>
+    </a>
+    <div class="container">
+      <ul class="text-center">
+        <li>
+          <a ng-click="setActiveView('jobs');" ng-class="{'active' : activeView === 'jobs' }" href="#" title="jobs">
+            <!--<i class="iconS-Briefcase-2"></i>-->
+            jobs</a>
+        </li>
+        <li>
+          <a ng-click="setActiveView('dealers');" ng-class="{'active' : activeView === 'dealers' }" href="#" title="dealerships">
+            <!--<i class="iconS-Handshake"></i>-->
+            dealerships</a>
+        </li>
+        <li>
+          <a ng-click="setActiveView('corps');" ng-class="{'active' : activeView === 'corps' }" href="#" title="corporations">
+            <!--<i class="iconS-Networking-2"></i>-->
+            corporations</a>
+        </li>
+        <li ng-if="activateTab">
+          <a ng-click="setActiveView('users');" ng-class="{'active' : activeView === 'users' }" href="#" title="manage_users">
+            <!--<i class="iconS-Networking-2"></i>-->
+            Manage Users</a>
+        </li>
+      
+      </ul>
+  
+        <!--<img class="img-responsive" src="/images/logo.png" alt="logo"> -->
+      
+   
+    
+    </div>
+    
+    <a class="pull-right addOn-log" ng-click="backToLogin('login')">
+      <!--<img class="img-responsive" src="/images/logo.png" alt="logo"> -->
+  
+      <span> Log Out </span>
+    
+    </a>
+  </header>
+  

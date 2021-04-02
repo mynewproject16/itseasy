@@ -1,0 +1,102 @@
+
+     
+
+  
+
+   
+    <div class="card-body" ng-app="myApp" id="login" >
+        
+        <div class="row" ng-if="!registerVisibility" style="margin-top:154px; margin-bottom: 110px;">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                      <form  class="well"  >
+                        <img  src="/images/logo.png" class="logocss">
+                        <div class = "form-group">
+                            <label style="font-size: 18px" for = "name"> Email:  </label>
+                            <input  ng-keyup="$event.keyCode == 13 ? submit(logincontact) : null" class="form-control" name="name"  ng-model="logincontact.name" placeholder="Email" required=""/>
+                            <span ng-show=" logincontact.email.$error.required" style="color:red;"></span>
+                            <span ng-show=" logincontact.name.$error.email" style="color:red;"> Invalid email.</span>
+                          </div>
+                       
+                        <div class = "form-group">
+                            <label  style="font-size: 18px" for = "password"> Password:  </label>
+                            <input type="password" id="password" class="form-control" ng-keyup="$event.keyCode == 13 ? submit(logincontact) : null" name="password" ng-model="logincontact.password"  placeholder="Password"  required=""/>
+                            <span ng-show="logincontact.userPass.$dirty &&  logincontact.password.$error.required">* Required</span>
+                            <span ng-show="logincontact.userPass.$error.minlength" style="color: red;">Password should be at least 6 character.</span>
+                            <span ng-show="logincontact.userPass.$error.maxlength" style="color: red;">Password minimum length should be 15.</span>
+                            <span ng-show="logincontact.userPass.$error.required" style="color: red;"></span>
+                        </div>
+                        <div class = "form-group">
+                            <input type="checkbox" ng-keyup="$event.keyCode == 13 ? submit(logincontact) : null"  id="rem_check" name= "rem_check" ng-checked="logincontact.rem_check" />
+                           <label  style="font-size: 15px" > Remember me </label>
+
+                        </div>
+                        <br>
+                        
+                        <button type="button" class="btn btn-primary" ng-click="submit(logincontact)"   style="font-size: 18px" class="btn btn-primary" >Login </button>
+     
+                        <!-- <a href="./partials/register.html"  style="font-size: 15px"> Register  </a>  -->
+                    </form>
+            </div>
+            <div class="col-md-4"></div>
+
+
+        </div>
+
+        <!-- <div class="row" ng-if="registerVisibility" style="margin-top:120px;">
+          <div id="register" >
+           
+  <div class="card-body" ng-app="" >
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                     
+                              <form role = "form" class="well" name="newcontact" novalidate>
+                               <div style="text-align: center;"> <h3><b>Sign up</b></h3></div>
+                                <div class = "form-group">
+                                    <label for = "name"> Name:  </label>
+                                    <input type = "text" id = "name" class = "form-control" placeholder = "Enter Name " ng-model = "newcontact.name" required>
+                                    <span ng-show=" newcontact.name.$error.required">First name is required.</span><br /><br />
+
+                                </div>
+                                <div class = "form-group">
+                                    <label for = "email"> Email:  </label>
+                                    <input type = "email" id = "email" class = "form-control" placeholder = "Enter Email " ng-model = "newcontact.email">
+                                </div>
+                                <div class = "form-group">
+                                    <label for = "password"> Password:  </label>
+                                    <input type = "password" id = "password" class = "form-control" placeholder = "Enter Password " ng-model = "newcontact.password">
+                                </div>
+                                <div class = "form-group">
+                                    <label for = "phone"> Phone:  </label>
+                                    <input type = "text" id = "phone" ng-minlength="6" ng-maxlength="15" class = "form-control" placeholder = "Enter Phone " ng-model = "newcontact.phone">
+                                    <span ng-show="newcontact.phone.$error.required">First name is required.</span><br /><br />
+
+                                  </div>
+                                <br>
+                                
+                                <input type="button" class="btn btn-primary" ng-click="registerContact(newcontact)" class="btn btn-primary" value = "Submit">
+                                <input type="button" class="btn btn-primary" ng-click="callLogin()" class="btn btn-primary" value = "Back">
+
+                              </form>
+                    </div>
+                    <div class="col-md-3"></div>
+        
+        
+                </div>
+              
+            </div>
+            <div class="card-footer text-muted">
+             
+            </div>
+          
+
+
+
+            </div>
+          </div> -->
+
+      
+    </div>
+ 
+  

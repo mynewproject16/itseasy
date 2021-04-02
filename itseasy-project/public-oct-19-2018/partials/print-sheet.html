@@ -1,0 +1,43 @@
+<div class="modal fade print_sheet_modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center text-uppercase">Print Sheet.</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <div class="form-group">
+              <label>Please select area</label>
+              <select class="form-control" ng-model="selected_sheet.name" ng-change="sheetSelected();">
+                <option value=""></option>
+                <option value="NORTH BERGEN">North Bergen</option>
+                <option value="PATERSON">Paterson</option>
+                <option value="EAST BRUNSWICK">East Brunswick</option>
+                <option value="JERSEY CITY">Jersey City</option>
+                <option value="OUT OF STATE">Out Of State</option>
+                <option value="RAHWAY">Rahway</option>
+                <option value="WYCKOFF">Wyckoff</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-12 text-center">
+            <a href="/pdfs/sheets/{{created_sheet.created_sheet_file_name}}" ng-if="selected_sheet.state === 'READY'" target="_blank" ng-click="$('.modal').modal('hide');">Download Sheet</a>
+            <span ng-if="selected_sheet.state === 'PROCESSING'">Processing ....</span>
+          </div>
+          <div class="col-sm-12 text-center" style="margin-top: 20px;">
+            <input type="text" ng-model="created_sheet_name.txt" ng-if="selected_sheet.state === 'READY'" /> &nbsp;&nbsp;
+            <button class="btn btn_red" ng-if="selected_sheet.state === 'READY'" ng-click="saveSheet(created_sheet.created_sheet_file_name);">Save Sheet</button>
+          </div>
+          <div class="col-sm-12 text-center printable-sheets" style="margin-top: 20px;">
+            <h5>Printable Sheets</h5>
+                <a class="btn btn_red" ng-repeat="sheet in printableSheets" href="/pdfs/sheets/{{sheet.created_sheet_file_name}}" target="_blank" ng-click="$('.modal').modal('hide');" style="margin-left: 20px;">{{sheet.created_sheet_name}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

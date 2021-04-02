@@ -1,0 +1,1158 @@
+<div class="tabs">
+    <!-- TAB BUTTONS -->
+    <!-- TAB BUTTONS -->
+    <ul id="tabs" class="nav nav-tabs" role="tablist">
+      <li class="col-xs-12 col-sm-6 active" ng-if="isPreviousPage"><a  href="#jobs_table" aria-controls="jobs_table" role="tab" data-toggle="tab">Jobs Table</a></li>
+      <li class="col-xs-12 col-sm-6 active" ng-if="!isPreviousPage"><a ng-click="getAll('dashboard')" href="#jobs_table" aria-controls="jobs_table" role="tab" data-toggle="tab">Jobs Table</a></li>
+
+      <li class="col-xs-12 col-sm-6"><a ng-click="editClicked('job','nom', $event)" href="#job_details" aria-controls="job_detail" role="tab">Job Details</a></li>
+    </ul>
+    <!-- TAB CONTENT -->
+    <div class="tab-content">
+      <!--JOBS TABLE-->
+      <div role="tabpanel" class="tab-pane fade in active" id="jobs_table">
+        <div class="text-center btn_container">
+          <button class="btn_red_invert" ng-click="addClicked('job')" type="button">new job</button>
+          <button class="btn_red_invert" ng-click="editClicked('job','arch')" id="editJobs" ng-if="hideDelete" ng-disabled="!current_job._id" type="button">edit job</button>
+          <button class="btn_red_invert" ng-click="editClicked('job','nom')"  id="editJobs" ng-if="!hideDelete" ng-disabled="!current_job._id" type="button">edit job</button>
+          <button class="btn_red_invert" ng-disabled="!current_job._id" id="deleteJobs" ng-if="!hideDelete" ng-click="deleteClicked('job')" type="button">delete job</button>
+          <button class="btn_red_invert" ng-disabled="!selected_jobs.length" ng-click="printSheet()" type="button">Print Sheet</button>
+          <button class="btn_red_invert" ng-if="!showArchive"  ng-click="getAllArchive('dashboard')" type="button"> show archive </button>
+          <button class="btn_red_invert" ng-if="showArchive" ng-click="getAll('dashboard')" type="button"> hide archive </button>
+          <button ng-if="jobRec" class="btn_red btn_search" type="button" ng-click="filterTable('archive')"><i class="glyphicon glyphicon-search" aria-hidden="true"></i>search</button>
+
+          <button ng-if="!jobRec" class="btn_red btn_search" type="button" ng-click="filterTable('jobs')"><i class="glyphicon glyphicon-search" aria-hidden="true"></i>search</button>
+          <button ng-if="jobRec" class="btn_red_invert m-l-20 btn_clear" type="button" ng-click="clearFilter('dashboard','archive')"><i class="glyphicon glyphicon-search" aria-hidden="true"></i>clear search</button>
+
+          <button ng-if="!jobRec" class="btn_red_invert m-l-20 btn_clear" type="button" ng-click="clearFilter('dashboard')"><i class="glyphicon glyphicon-search" aria-hidden="true"></i>clear search</button>
+        </div>
+        <div class="search_block">
+          <div class="input_container">
+            <input placeholder="search by vin" type="text" ng-model="search.vehicle_vin">
+            <input placeholder="search by dealer name" type="text" ng-model="search.name">
+            <input placeholder="search by last name" type="text" ng-model="search.primary_last_name">
+            <input placeholder="search by company" type="text" ng-model="search.vehicle_insurance_company">
+          </div>
+        </div>
+        <div class="row">
+          <div class="pull-left entries_nbr" >Showing <span>{{showMECount}}</span> of <span>{{jobsDataCount}}</span> entries</div>
+          <nav class="pull-right">
+            <!-- <button ng-click="onPageChange();"></button> -->
+            <ul class="pager" ng-if="!jobRec">
+              <li><a id="prevBtn" ng-class="{'disabled' :true}" ng-click="pageChanged('jobs', 'prev')" href="#"><i class="iconL-Left-2"></i> Prev</a></li>
+              <li><a id="nextBtn" ng-click="pageChanged('jobs', 'next')" href="#">Next <i class="iconL-Right-2"></i></a></li>
+            </ul>
+            <ul class="pager" ng-if="jobRec">
+              <li><a id="prevBtn" ng-class="{'disabled' :true}" ng-click="pageChanged('archive', 'prev')" href="#"><i class="iconL-Left-2"></i> Prev</a></li>
+              <li><a id="nextBtn" ng-click="pageChanged('archive', 'next')" href="#">Next <i class="iconL-Right-2"></i></a></li>
+            </ul>
+            <div class="text-right entries_container">
+              show
+              <!-- <select name="entries" id="entries" ng-model="tables.jobs.items_per_page" ng-change="pageChangedDropdown('jobs')" number-model-to-string>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+              </select> -->
+              <select ng-if="!jobRec" name="category-group" id="categoryGroup" ng-model="pageSizeSelected" ng-change="onPageSizeChange(pageSizeSelected,'job')"                                         ng-change="onCategoryChange(itemSelected)" 
+          ng-options="pagesize.name  for pagesize in ChangePageSize">
+     
+      </select>
+      <select ng-if="jobRec" name="category-group" id="categoryGroup" ng-model="pageSizeSelected" ng-change="onPageSizeChange(pageSizeSelected,'arch')"                                         ng-change="onCategoryChange(itemSelected)" 
+      ng-options="pagesize.name  for pagesize in ChangePageSize">
+  
+  </select>
+  
+      <!-- <select name="category-group" id="categoryGroup" class="form-control" ng-model="itemSelected"                                          ng-change="onCategoryChange(itemSelected)" 
+          ng-options="category.name group by category.group for category in categories">
+     
+      </select> -->
+              entries
+            </div>
+          </nav>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th> <input name="select_check" id="select_all_jobs" ng-model="all_selected.jobs" ng-true-value="true" ng-false-value="false" type="checkbox" ng-change="selectAll('jobs');" />
+                  <label for="select_all_jobs"><span></span></label></th>
+                <th> VIN NUMBER</th>
+                <th>DEALER NAME</th>
+                <th>LAST NAME</th>
+                <th>COMPANY</th>
+                <th>DATE</th>
+                <th>DATE SENT</th>
+                <th>DATE RETURN</th>
+                <th>STATE</th>
+                <th>STATUS</th>
+                <th>LEASE/BUY</th>
+                <!--<th>DATE RETURN</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="job in tables.jobs.current_page_data"  ng-class="(job._id==current_job._id) || job.selected == true ? ('selected ' + job.status.toLowerCase()) : job.status.toLowerCase()">
+               <td ng-click="select('job', $index)"> <input name="select_check" id="{{'select_check_' + $index}}" type="checkbox" ng-model="tables.jobs.current_page_data[$index].selected" />
+                <label for="{{'select_check_' + $index}}">
+                  <span>
+                                </span>
+                </label></td>
+                <td> {{job.vehicle_vin ? job.vehicle_vin : '/'}}</td>
+                  <td>{{job.dealer.name ? job.dealer.name : (job.dealer_name? job.dealer_name : (job.dealer_id.name? job.dealer_id.name : '/' ) )}}</td>
+                  <td>{{job.last_name_table ? job.last_name_table  : (job.primary_last_name? job.primary_last_name : (job.primary_company ? job.primary_company : '/' ) )}}</td>
+                  <td>{{job.vehicle_insurance_company ? job.vehicle_insurance_company : '/'}}</td>
+                <td>{{job.date ? (job.date | date: dateFormat) : '/' }}</td>
+                <td>{{job.date_sent ? (job.date_sent | date: dateFormat) : '/'}}</td>
+                <td>{{job.date_return ? (job.date_return | date: dateFormat) : '/'}}</td>
+                <td>{{job.state ? job.state : '/'}}</td>
+                <td>
+                  <select id="{{job._id}}" class="form-control uppercase" ng-model="job.status" ng-change="updateJobStatus(job)">
+                    <option>ITS EASY</option>
+                    <option>READY FOR DMV</option>
+                    <option>SENT TO DMV</option>
+                    <option>BACK FROM DMV</option>
+                    <option>READY TO SHIP</option>
+                    <option>SHIPPED</option>
+                  </select>
+                </td>
+                <td>{{job.lease_or_buy ? job.lease_or_buy : '/'}}</td>
+               <!---- <td>{{job.date_return ? (job.date_return | date: dateFormat) : '/'}}</td> -->
+  
+              </tr>
+            </tbody>
+          </table>
+          <div style="margin-top: 25px;" ng-if="current_job.sheet_name">
+            <h4 class="text-center">Destination: {{current_job.sheet_name}} &nbsp;&nbsp;&nbsp; Date sent: {{current_job.date_sent}}</h4>
+          </div>
+        </div>
+      </div>
+      <!--JOB DETAILS-->
+      <div role="tabpanel" class="tab-pane fade" id="job_details">
+        <!-- JOB DETAILS TAB BUTTONS -->
+        <ul id="job_detail" class="nav nav-tabs">
+          <li class="active"><a href="#information" aria-controls="information" role="tab" data-toggle="tab">information</a></li>
+          <li class=""><a href="#dealer" aria-controls="dealer" role="tab" data-toggle="tab" ng-click="updateForJob('dealer')">dealer</a></li>
+          <!-- <li class=""><a href="#seller" aria-controls="seller" role="tab" data-toggle="tab">seller</a></li> -->
+          <li class=""><a href="#lessor" aria-controls="lessor" role="tab" data-toggle="tab" ng-click="updateForJob('lessor')">lessor</a></li>
+          <li class=""><a href="#lessee" aria-controls="lessee" role="tab" data-toggle="tab" ng-if="current_job.lease_or_buy === 'buy'">owner</a></li>
+          <li class=""><a href="#lessee" aria-controls="lessee" role="tab" data-toggle="tab" ng-if="current_job.lease_or_buy !== 'buy'">leasee</a></li>
+          <li class=""><a href="#co_owner" aria-controls="co_owner" role="tab" data-toggle="tab">co owner</a></li>
+          <li class=""><a href="#vehicle" aria-controls="vehicle" role="tab" data-toggle="tab">vehicle</a></li>
+          <li class=""><a href="#epa" aria-controls="epa" role="tab" data-toggle="tab">epa</a></li>
+          <li class=""><a href="#liens" aria-controls="liens" role="tab" data-toggle="tab" ng-click="updateForJob('lien')">liens</a></li>
+          <li class=""><a href="#forms" aria-controls="forms" role="tab" data-toggle="tab" ng-click="createForms()">forms</a></li>
+          <li class=""><a href="#tracking" aria-controls="tracking" role="tab" data-toggle="tab">log</a></li>
+        </ul>
+        <!-- JOB DETAILS TAB CONTENT -->
+        <div class="tab-content">
+          <!--INFORMATION TAB-->
+          <div role="tabpanel" class="tab-pane active fade in" id="information">
+            <form class="job_form" ng-submit="formSubmitted('job')">
+              <div class="row">
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group date">
+                    <label>Date</label>
+                    <input type="text" format-date-model ng-model="current_job.date" uib-datepicker-popup="{{dateFormat}}" is-open="jobDatePickers.date.opened" datepicker-options="dateOptions" class="form-control" placeholder="MM/DD/YYYY" close-text="Close" tabindex="1" />
+                    <button type="button" class="date_picker" ng-click="openDatePicker('date')"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </div>
+                  <div class="form-group date">
+                    <label>Date sent</label>
+                    <input format-date-model ng-model="current_job.date_sent" type="text" uib-datepicker-popup="{{dateFormat}}" is-open="jobDatePickers.date_sent.opened" datepicker-options="dateOptions" class="form-control" placeholder="MM/DD/YYYY" close-text="Close" tabindex="2">
+                    <button type="button" class="date_picker" ng-click="openDatePicker('date_sent')"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </div>
+                  <div class="form-group date">
+                    <label>Date return</label>
+                    <input format-date-model ng-model="current_job.date_return" type="text" uib-datepicker-popup="{{dateFormat}}" is-open="jobDatePickers.date_return.opened" datepicker-options="dateOptions" class="form-control" placeholder="MM/DD/YYYY" close-text="Close" tabindex="3">
+                    <button type="button" class="date_picker" ng-click="openDatePicker('date_return')"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </div> 
+                  <div class="form-group">
+                    <label>Trans Type</label>
+                    <input class="form-control" list="trans-type" ng-model="current_job.trans_type" tabindex="4" />
+                    <datalist id="trans-type" ng-model="current_job.trans_type">
+                      <option value="INITIAL">INITIAL</option>
+                      <option value="DUPL">DUPL</option>
+                      <option value="TRANS">TRANS</option>
+                      <option value="TITLE">TITLE</option>
+                      <option value="TAX">TAX</option>
+                      <option value="BOAT">BOAT</option>
+                      <option value="TRAIL">TRAIL</option>
+                      <option value="DLR">DLR</option>
+                      <option value="TLC">TLC</option>
+                      <option value="RENEW">RENEW</option>
+                      <option value="OMS">OMS</option>
+                      <option value="LIVRY">LIVRY</option>
+                      <option value="REPL PLATE">REPL PLATE</option>
+                    </datalist>
+                  </div>
+                  <div class="form-group">
+                    <label>State</label>
+                    <input class="form-control" list="job-state" ng-model="current_job.state" tabindex="5">
+                    <datalist id="job-state" ng-model="current_job.state">
+                      <option value="CT">CT</option>
+                      <option value="NJ">NJ</option>
+                      <option value="NY">NY</option>
+                    </datalist>
+                  </div>
+                </div>
+                <!--SECOND ROW RADIO-->
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group form_radio">
+                    <label>Lease/Buy</label>
+                    <div class="radio_cont">
+                      <input name="lease_buy" id="lease" type="radio" value="lease" ng-model="current_job.lease_or_buy" />
+                      <label for="lease"><span></span>Lease</label>
+                      <input name="lease_buy" id="buy" type="radio" value="buy" ng-model="current_job.lease_or_buy" />
+                      <label for="buy"><span></span>Buy</label>
+                    </div>
+                  </div>
+                  <div class="form-group form_radio">
+                    <label>Rep pl</label>
+                    <div class="radio_cont">
+                      <input name="rep_pl" id="rep_yes" type="radio" ng-value="true" ng-model="current_job.rep_pl" />
+                      <label for="rep_yes"><span></span>Yes</label>
+                      <input name="rep_pl" id="rep_no" type="radio" ng-value="false" ng-model="current_job.rep_pl" />
+                      <label for="rep_no"><span></span>No</label>
+                    </div>
+                  </div>
+                  <div class="form-group form_radio">
+                    <label>Trans</label>
+                    <div class="radio_cont">
+                      <input name="trans" id="trans_yes" type="radio" ng-value="true" ng-model="current_job.trans" />
+                      <label for="trans_yes"><span></span>Yes</label>
+                      <input name="trans" id="trans_no" type="radio" ng-value="false" ng-model="current_job.trans" />
+                      <label for="trans_no"><span></span>No</label>
+                    </div>
+                  </div>
+                  <div class="form-group form_radio">
+                    <label>Hold</label>
+                    <div class="radio_cont">
+                      <input name="hold" id="hold_yes" type="radio" ng-value="true" ng-model="current_job.hold" />
+                      <label for="hold_yes"><span></span>Yes</label>
+                      <input name="hold" id="hold_no" type="radio" ng-value="false" ng-model="current_job.hold" />
+                      <label for="hold_no"><span></span>No</label>
+                    </div>
+                  </div>
+                  <div class="form-group form_radio">
+                    <label>Add Lien</label>
+                    <div class="radio_cont">
+                      <input name="add_lien" id="add_lien_yes" type="radio" ng-value="true" ng-model="current_job.add_lien" />
+                      <label for="add_lien_yes"><span></span>Yes</label>
+                      <input name="add_lien" id="add_lien_no" type="radio" ng-value="false" ng-model="current_job.add_lien" />
+                      <label for="add_lien_no"><span></span>No</label>
+                    </div>
+                  </div>
+                </div>
+                <!--THIRD ROW RADIO-->
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group form_radio">
+                    <label>Initial</label>
+                    <div class="radio_cont">
+                      <input name="initial" id="initial_yes" type="radio" ng-value="true" ng-model="current_job.initial" />
+                      <label for="initial_yes"><span></span>Yes</label>
+                      <input name="initial" id="initial_no" type="radio" ng-value="false" ng-model="current_job.initial" />
+                      <label for="initial_no"><span></span>No</label>
+                    </div>
+                  </div>
+                  <div class="form-group form_radio">
+                    <label>Dupl</label>
+                    <div class="radio_cont">
+                      <input name="dupl" id="dupl_yes" type="radio" ng-value="true" ng-model="current_job.dupl" />
+                      <label for="dupl_yes"><span></span>Yes</label>
+                      <input name="dupl" id="dupl_no" type="radio" ng-value="false" ng-model="current_job.dupl" />
+                      <label for="dupl_no"><span></span>No</label>
+                    </div>
+                  </div>
+                  <div class="form-group form_radio">
+                    <label>Rental</label>
+                    <div class="radio_cont">
+                      <input name="rental" id="rental_yes" type="radio" ng-value="true" ng-model="current_job.rental" />
+                      <label for="rental_yes"><span></span>Yes</label>
+                      <input name="rental" id="rental_no" type="radio" ng-value="false" ng-model="current_job.rental" />
+                      <label for="rental_no"><span></span>No</label>
+                    </div>
+                  </div>
+                  <div class="form-group form_radio">
+                    <label>Job type</label>
+                    <div class="radio_cont">
+                      <input name="job_type" id="sys" type="radio" value="sys" ng-model="current_job.job_type" />
+                      <label for="sys"><span></span>Sys</label>
+                      <input name="job_type" id="non_sys" type="radio" value="non-sys" ng-model="current_job.job_type" />
+                      <label for="non_sys"><span></span>Non-sys</label>
+                    </div>
+                  </div>
+                  <div class="form-group form_radio">
+                    <label>Remove Lien</label>
+                    <div class="radio_cont">
+                      <input name="replacement" id="remove_lien_yes" type="radio" ng-value="true" ng-model="current_job.remove_lien" />
+                      <label for="remove_lien_yes"><span></span>Yes</label>
+                      <input name="replacement" id="remove_lien_no" type="radio" ng-value="false" ng-model="current_job.remove_lien" />
+                      <label for="remove_lien_no"><span></span>No</label>
+                    </div>
+                  </div>
+                </div>
+                <!--FOURTH ROW RADIO-->
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group form_radio">
+                    <label>Renew</label>
+                    <div class="radio_cont">
+                      <input name="renew" id="renew_yes" type="radio" ng-value="true" ng-model="current_job.renew" />
+                      <label for="renew_yes"><span></span>Yes</label>
+                      <input name="renew" id="renew_no" type="radio" ng-value="false" ng-model="current_job.renew" />
+                      <label for="renew_no"><span></span>No</label>
+                    </div>
+                  </div>
+                  <div class="form-group form_radio">
+                    <label>Comm</label>
+                    <div class="radio_cont">
+                      <input name="comm" id="comm_yes" type="radio" ng-value="true" ng-model="current_job.comm" />
+                      <label for="comm_yes"><span></span>Yes</label>
+                      <input name="comm" id="comm_no" type="radio" ng-value="false" ng-model="current_job.comm" />
+                      <label for="comm_no"><span></span>No</label>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Created by</label>
+                    <input type="text" ng-model="current_job.created_by" class="form-control" disabled />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label>Status</label>
+                    <select class="form-control uppercase" ng-model="current_job.status" tabindex="5">
+                      <option>ITS EASY</option>
+                      <option>READY FOR DMV</option>
+                      <option>SENT TO DMV</option>
+                      <option>BACK FROM DMV</option>
+                      <option>READY TO SHIP</option>
+                      <option>SHIPPED</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                  <div class="form-group pl_20">
+                    <label>Note</label>
+                    <input class="form-control" list="note" ng-model="current_job.note" tabindex="6" />
+                    <datalist id="note" ng-model="current_job.note">
+                      <option>OUR CK __________________ DUE ALL. CHECK IN BASKET</option>
+                      <option>OUR CK __________________ DUE ALL. MAKE A BILL</option>
+                      <option>OUR CK __________________ DUE DMV ONLY. CHECK IN BASKET</option>
+                      <option>OUR CK __________________ DUE DMV ONLY. MAKE A BILL</option>
+                      <option>OUR CK __________________ DEALER CK AMT ___________</option>
+                      <option>DUE SERVICE FEE ONLY</option>
+                    </datalist>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group form_radio">
+                    <label>Sheet Note</label>
+                    <div class="radio_cont">
+                      <input name="sheet_note" id="sheet_note_yes" type="radio" ng-value="true" ng-model="current_job.sheet_note" />
+                      <label for="sheet_note_yes"><span></span>Yes</label>
+                      <input name="sheet_note" id="sheet_note_no" type="radio" ng-value="false" ng-model="current_job.sheet_note" />
+                      <label for="sheet_note_no"><span></span>No</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <div class="text-center">
+                <button type="submit" class="btn_red">{{ isBusy ? 'Saving' : 'Save' }}</button>
+              </div>
+            </form>
+          </div>
+          <!--DEALER TAB-->
+          <div role="tabpanel" class="tab-pane fade" id="dealer">
+            <ng-include src="'/partials/dealers-table.html'"></ng-include>
+            <ng-include src="'/partials/dealer-details.html'"></ng-include>
+          </div>
+          <!--SELLER TAB-->
+          <div role="tabpanel" class="tab-pane fade" id="seller">
+            <form class="job_form" ng-submit="formSubmitted('job')">
+              <div class="row">
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.seller_name" tabindex="7">
+                  </div>
+                  <div class="form-group">
+                    <label>State</label>
+                    <input class="form-control" list="seller-state" ng-init="current_job.seller_state" ng-model="current_job.seller_state" tabindex="11">
+                    <datalist id="seller-state" ng-init="current_job.seller_state" ng-model="current_job.seller_state">
+                      <option value="CT">CT</option>
+                      <option value="NJ">NJ</option>
+                      <option value="NY">NY</option>
+                    </datalist>
+                  </div>
+                </div>
+                <!--SECOND ROW-->
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label>Address 1</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.seller_address1" tabindex="8">
+                  </div>
+                  <div class="form-group">
+                    <label>Zip code</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.seller_zip" tabindex="12">
+                  </div>
+                </div>
+                <!--THIRD ROW-->
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label>Address 2</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.seller_address2" tabindex="9">
+                  </div>
+                  <div class="form-group">
+                    <label>Seller corp code</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.seller_corp_code" tabindex="13">
+                  </div>
+                </div>
+                <!--FOURTH ROW-->
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label>City</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.seller_city" tabindex="10">
+                  </div>
+                  <div class="form-group form_radio">
+                    <label>Seller same as dealer</label>
+                    <div class="radio_cont">
+                      <input name="same" id="same_yes" type="radio" ng-value="true" ng-model="current_job.seller_dealer_same" ng-change='sellerSameAsDealerChoice()' />
+                      <label for="same_yes"><span></span>Yes</label>
+                      <input name="same" id="same_no" type="radio" ng-value="false" ng-model="current_job.seller_dealer_same" ng-change='sellerSameAsDealerChoice()' />
+                      <label for="same_no"><span></span>No</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <div class="text-center">
+                <button type="submit" class="btn_red">Save</button>
+              </div>
+            </form>
+          </div>
+          <!--LESSOR TAB-->
+          <div role="tabpanel" class="tab-pane fade" id="lessor">
+            <ng-include src="'/partials/corps-table.html'"></ng-include>
+            <ng-include src="'/partials/corp-details.html'"></ng-include>
+          </div>
+          <!--LESSEE TAB-->
+          <div role="tabpanel" class="tab-pane fade" id="lessee">
+            <form class="job_form" ng-submit="formSubmitted('job')">
+              <div class="row">
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group form_radio">
+                    <label>Company or Individual</label>
+                    <div class="radio_cont company-individual">
+                      <input name="is_lessee_company" id="company" type="radio" ng-value="true" ng-model="current_job.is_lessee_company" ng-change="companyOrIndividualChosen();" />
+                      <label for="company"><span></span>Company</label>
+                      <input name="is_lessee_company" id="owner" type="radio" ng-value="false" ng-model="current_job.is_lessee_company" ng-change="companyOrIndividualChosen();" />
+                      <label for="owner"><span></span>Individual</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.primary_first_name" ng-disabled="current_job.is_lessee_company" tabindex="14">
+                  </div>
+                  <div class="form-group">
+                    <label>Address 1</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.primary_address1" tabindex="18">
+                  </div>
+                  <div class="form-group">
+                    <label>Zip code</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.primary_zip" tabindex="22">
+                  </div>
+                </div>
+                <!--SECOND ROW-->
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label>Middle name</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.primary_middle_name" ng-disabled="current_job.is_lessee_company" tabindex="15">
+                  </div>
+                  <div class="form-group">
+                    <label>Address 2</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.primary_address2" tabindex="18">
+                  </div>
+                  <div class="form-group form_radio">
+                    <label>Mailing address same as above</label>
+                    <div class="radio_cont">
+                      <input name="mailing" id="mailing_yes" type="radio" ng-value="true" ng-model="current_job.primary_addess_mailing_address_same" />
+                      <label for="mailing_yes"><span></span>Yes</label>
+                      <input name="mailing" id="mailing_no" type="radio" ng-value="false" ng-model="current_job.primary_addess_mailing_address_same" />
+                      <label for="mailing_no"><span></span>No</label>
+                    </div>
+                  </div>
+                </div>
+                <!--THIRD ROW-->
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label>Last name</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.primary_last_name" ng-disabled="current_job.is_lessee_company" tabindex="16">
+                  </div>
+                  <div class="form-group">
+                    <label>City</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.primary_city" tabindex="20">
+                  </div>
+                </div>
+                <!--FOURTH ROW-->
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label>Company</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.primary_company" ng-disabled="!current_job.is_lessee_company" tabindex="17">
+                  </div>
+                  <div class="form-group">
+                    <label>State</label>
+                    <input class="form-control" list="primary_state" ng-init="current_job.primary_state" ng-model="current_job.primary_state" tabindex="21" />
+                    <datalist id="primary_state" ng-init="current_job.primary_state" ng-model="current_job.primary_state">
+                      <option value="CT">CT</option>
+                      <option value="NJ">NJ</option>
+                      <option value="NY">NY</option>
+                    </datalist>
+                  </div>
+                </div>
+              </div>
+              <!--<p>Mailing address (if it's not the same, otherwise will be hidden)</p>-->
+              <div class="row">
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label>Mailing address 1</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.primary_mailing_address1" ng-disabled="current_job.primary_addess_mailing_address_same" tabindex="23">
+                  </div>
+                  <div class="form-group">
+                    <label>Mailing Zip code</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.primary_mailing_zip" ng-disabled="current_job.primary_addess_mailing_address_same" tabindex="27">
+                  </div>
+                </div>
+                <!--SECOND ROW-->
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label>Mailing address 2</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.primary_mailing_address2" ng-disabled="current_job.primary_addess_mailing_address_same" tabindex="24">
+                  </div>
+                </div>
+                <!--THIRD ROW-->
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label>Mailing city</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.primary_mailing_city" ng-disabled="current_job.primary_addess_mailing_address_same" tabindex="25">
+                  </div>
+                </div>
+                <!--FOURTH ROW-->
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label>Mailing State</label>
+                    <input class="form-control" list="mailing-state" ng-init="current_job.primary_mailing_state" ng-model="current_job.primary_mailing_state" ng-disabled="current_job.primary_addess_mailing_address_same" tabindex="26" />
+                    <datalist id="mailing-state" ng-init="current_job.primary_mailing_state" ng-model="current_job.primary_mailing_state" ng-disabled="current_job.primary_addess_mailing_address_same">
+                      <option value="CT">CT</option>
+                      <option value="NJ">NJ</option>
+                      <option value="NY">NY</option>
+                    </datalist>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group form_radio">
+                    <label>Sex</label>
+                    <div class="radio_cont">
+                      <input name="sex" id="sex_male" type="radio" value="male" ng-model="current_job.primary_sex" />
+                      <label for="sex_male"><span></span>Male</label>
+                      <input name="sex" id="sex_female" type="radio" value="female" ng-model="current_job.primary_sex" />
+                      <label for="sex_female"><span></span>Female</label>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Corp code</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.primary_corp_code" tabindex="31">
+                  </div>
+                  <div class="form-group">
+                    <label>Violation</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.primary_violation" tabindex="35">
+                  </div>
+                </div>
+                <!--SECOND ROW-->
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group date">
+                    <label>Date of birth</label>
+                    <input format-date-model ng-model="current_job.primary_dob" type="text" uib-datepicker-popup="{{dateFormat}}" is-open="jobDatePickers.primary_dob.opened" datepicker-options="dateOptions" class="form-control" placeholder="MM/DD/YYYY" close-text="Close" tabindex="28">
+                    <button type="button" class="date_picker" ng-click="openDatePicker('primary_dob')"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </div>
+                  <div class="form-group">
+                    <label>Social security number</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.primary_ssn_number" ui-mask="999-99-9999" tabindex="32">
+                  </div>
+                  <div class="form-group form_radio">
+                    <label>Registration Suspended?</label>
+                    <div class="radio_cont">
+                      <input name="reg_suspended" id="reg_suspended_yes" type="radio" value="false" ng-model="current_job.reg_suspended_yes" />
+                      <label for="reg_suspended_yes"><span></span>Yes</label>
+                      <input name="reg_suspended" id="reg_suspended_no" type="radio" value="true" ng-model="current_job.reg_suspended_no" />
+                      <label for="reg_suspended_no"><span></span>No</label>
+                    </div>
+                  </div>
+                </div>
+                <!--THIRD ROW-->
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label>Eye color</label>
+                    <input class="form-control" list="eye-color" ng-model="current_job.primary_eye_color" tabindex="29" />
+                    <datalist id="eye-color" ng-model="current_job.primary_eye_color">
+                      <option>Brown</option>
+                      <option>Blue</option>
+                      <option>Black</option>
+                      <option>Green</option>
+                      <option>Hazel</option>
+                    </datalist>
+                  </div>
+                  <div class="form-group">
+                    <label>Fed tax ID number</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.primary_tax_id_number" tabindex="33">
+                  </div>
+                </div>
+                <!--FOURTH ROW-->
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label>Licence number</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.primary_license_number" tabindex="30">
+                  </div>
+                  <div class="form-group">
+                    <label>State of</label>
+                    <input class="form-control" list="primary-state-of" ng-init="current_job.primary_state_of" ng-model="current_job.primary_state_of" tabindex="34" />
+                    <datalist id="primary-state-of" ng-init="current_job.primary_state_of" ng-model="current_job.primary_state_of">
+                      <option value="CT">CT</option>
+                      <option value="NJ">NJ</option>
+                      <option value="NY">NY</option>
+                    </datalist>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <div class="text-center">
+                <button type="submit" class="btn_red">Save</button>
+              </div>
+            </form>
+          </div>
+          <!--CO-OWNER TAB-->
+          <div role="tabpanel" class="tab-pane fade" id="co_owner">
+            <form class="job_form" ng-submit="formSubmitted('job')">
+              <div class="row">
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.coowner_first_name" tabindex="36">
+                  </div>
+                  <div class="form-group">
+                    <label>Address 1</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.coowner_address1" tabindex="40">
+                  </div>
+                  <div class="form-group">
+                    <label>Zip code</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.coowner_zip" tabindex="44">
+                  </div>
+                </div>
+                <!--SECOND ROW-->
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label>Middle name</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.coowner_middle_name" tabindex="37">
+                  </div>
+                  <div class="form-group">
+                    <label>Address 2</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.coowner_address2" tabindex="41">
+                  </div>
+                  <div class="form-group form_radio">
+                    <label>Mailing address same as above</label>
+                    <div class="radio_cont">
+                      <input name="mailing2" id="mailing2_yes" type="radio" ng-value="true" ng-model="current_job.coowner_addess_mailing_address_same" />
+                      <label for="mailing2_yes"><span></span>Yes</label>
+                      <input name="mailing2" id="mailing2_no" type="radio" ng-value="false" ng-model="current_job.coowner_addess_mailing_address_same" />
+                      <label for="mailing2_no"><span></span>No</label>
+                    </div>
+                  </div>
+                </div>
+                <!--THIRD ROW-->
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label>Last name</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.coowner_last_name" tabindex="38">
+                  </div>
+                  <div class="form-group">
+                    <label>City</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.coowner_city" tabindex="42">
+                  </div>
+                </div>
+                <!--FOURTH ROW-->
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label>Company</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.coowner_company" tabindex="39">
+                  </div>
+                  <div class="form-group">
+                    <label>State</label>
+                    <input class="form-control" list="coowner-state" ng-init="current_job.coowner_state" ng-model="current_job.coowner_state" tabindex="43" />
+                    <datalist id="coowner-state" ng-init="current_job.coowner_state" ng-model="current_job.coowner_state">
+                      <option value="CT">CT</option>
+                      <option value="NJ">NJ</option>
+                      <option value="NY">NY</option>
+                    </datalist>
+                  </div>
+                </div>
+              </div>
+              <!--<p>Mailing address (if it's not the same, otherwise will be hidden)</p>-->
+              <div class="row">
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label>Mailing address 1</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.coowner_mailing_address1" ng-disabled="current_job.coowner_addess_mailing_address_same" tabindex="45">
+                  </div>
+                  <div class="form-group">
+                    <label>Mailing Zip code</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.coowner_mailing_zip" ng-disabled="current_job.coowner_addess_mailing_address_same" tabindex="49">
+                  </div>
+                </div>
+                <!--SECOND ROW-->
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label>Mailing address 2</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.coowner_mailing_address2" ng-disabled="current_job.coowner_addess_mailing_address_same" tabindex="46">
+                  </div>
+                </div>
+                <!--THIRD ROW-->
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label>Mailing city</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.coowner_mailing_city" ng-disabled="current_job.coowner_addess_mailing_address_same" tabindex="47">
+                  </div>
+                </div>
+                <!--FOURTH ROW-->
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label>Mailing State</label>
+                    <input class="form-control" list="coowner-mailing-state" ng-init="current_job.coowner_mailing_state" ng-model="current_job.coowner_mailing_state" ng-disabled="current_job.coowner_addess_mailing_address_same" tabindex="48" />
+                    <datalist id="coowner-mailing-state" ng-init="current_job.coowner_mailing_state" ng-model="current_job.coowner_mailing_state" ng-disabled="current_job.coowner_addess_mailing_address_same">
+                      <option value="CT">CT</option>
+                      <option value="NJ">NJ</option>
+                      <option value="NY">NY</option>
+                    </datalist>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group form_radio">
+                    <label>Sex</label>
+                    <div class="radio_cont">
+                      <input name="sex2" id="sex2_male" type="radio" value="male" ng-model="current_job.coowner_sex" />
+                      <label for="sex2_male"><span></span>Male</label>
+                      <input name="sex2" id="sex2_female" type="radio" value="female" ng-model="current_job.coowner_sex" />
+                      <label for="sex2_female"><span></span>Female</label>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Corp code</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.coowner_corp_code" tabindex="53">
+                  </div>
+                </div>
+                <!--SECOND ROW-->
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group date">
+                    <label>Date of birth</label>
+                    <input type="text" format-date-model ng-model="current_job.coowner_dob" uib-datepicker-popup="{{dateFormat}}" is-open="jobDatePickers.coowner_dob.opened" datepicker-options="dateOptions" class="form-control" placeholder="MM/DD/YYYY" close-text="Close" tabindex="50" />
+                    <button type="button" class="date_picker" ng-click="openDatePicker('coowner_dob')"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </div>
+                  <div class="form-group">
+                    <label>Social security number</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.coowner_ssn_number" ui-mask="999-99-9999" tabindex="54">
+                  </div>
+                </div>
+                <!--THIRD ROW-->
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label>Eye color</label>
+                    <input class="form-control" list="coowner-eye-color" ng-model="current_job.coowner_eye_color" tabindex="51" />
+                    <datalist id="coowner-eye-color" ng-model="current_job.coowner_eye_color">
+                      <option>Brown</option>
+                      <option>Blue</option>
+                      <option>Black</option>
+                      <option>Green</option>
+                      <option>Hazel</option>
+                      <option>Pink? :)</option>
+                    </datalist>
+                  </div>
+                </div>
+                <!--FOURTH ROW-->
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label>Licence number</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.coowner_license_number" tabindex="52">
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <div class="text-center">
+                <button type="submit" class="btn_red">Save</button>
+              </div>
+            </form>
+          </div>
+          <!--VEHICLE TAB-->
+          <div role="tabpanel" class="tab-pane fade" id="vehicle">
+            <form class="job_form" ng-submit="formSubmitted('job')">
+              <div class="row">
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label>Vin</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.vehicle_vin" tabindex="55">
+                  </div>
+                  <div class="form-group form_radio">
+                    <label>Status</label>
+                    <div class="radio_cont">
+                      <input name="status" id="status_new" type="radio" value="new" ng-model="current_job.vehicle_status" />
+                      <label for="status_new"><span></span>New</label>
+                      <input name="status" id="status_used" type="radio" value="used" ng-model="current_job.vehicle_status" />
+                      <label for="status_used"><span></span>Used</label>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Make</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.vehicle_make" tabindex="62">
+                  </div>
+                  <!-- <div class="form-group">
+                    <label>Fuel type</label>
+                    <input class="form-control" list="fuel-type" ng-model="current_job.vehicle_fuel_type" tabindex="66" />
+                    <datalist id="fuel-type" ng-model="current_job.vehicle_fuel_type">
+                      <option>CMF</option>
+                      <option>Diesel</option>
+                      <option>Elect</option>
+                      <option>Gas</option>
+                      <option>Hybrid</option>
+                    </datalist>
+                  </div> -->
+                  <div class="form-group">
+                    <label>Purchase Price</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.vehicle_purchase_price" tabindex="70">
+                  </div>
+                  <div class="form-group form_radio">
+                    <label>Title/Registration</label>
+                    <div class="radio_cont">
+                      <input name="registration" id="instate" type="radio" value="instate" ng-model="current_job.vehicle_title_reg" />
+                      <label for="instate"><span></span>Instate</label>
+                      <input name="registration" id="outofstate" type="radio" value="outofstate" ng-model="current_job.vehicle_title_reg" />
+                      <label for="outofstate"><span></span>Outofstate</label>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Term of lease</label>
+                    <input class="form-control" list="terms-lease" ng-init="current_job.vehicle_lease_terms" number-model-to-string ng-model="current_job.vehicle_lease_terms" tabindex="77" />
+                    <datalist id="terms-lease" ng-init="current_job.vehicle_lease_terms" number-model-to-string ng-model="current_job.vehicle_lease_terms">
+                      <option value="12">12</option>
+                      <option value="24">24</option>
+                      <option value="36">36</option>
+                      <option value="48">48</option>
+                      <option value="52">52</option>
+                    </datalist>
+                  </div>
+                </div>
+                <!--SECOND ROW-->
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label>Plate</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.vehicle_plate" tabindex="56">
+                  </div>
+                  <div class="form-group">
+                    <label>Weight</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.vehicle_weight" tabindex="59">
+                  </div>
+                  <div class="form-group">
+                    <label>Model</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.vehicle_model" tabindex="63">
+                  </div>
+                  <!-- <div class="form-group">
+                    <label>Cylinders</label>
+                    <input class="form-control" list="cylinders" ng-model="current_job.vehicle_cylinders" number-model-to-string tabindex="67" />
+                    <datalist id="cylinders" ng-model="current_job.vehicle_cylinders" number-model-to-string>
+                      <option>4</option>
+                      <option>6</option>
+                      <option>8</option>
+                      <option>12</option>
+                    </datalist>
+                  </div> -->
+                  <div class="form-group">
+                    <label>Trade in</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.vehicle_trade_in" tabindex="71">
+                  </div>
+                  <div class="form-group">
+                    <label>Insurance Company</label>
+                    <input class="form-control" list="insurance-company" ng-model="current_job.vehicle_insurance_company" ng-if="current_job.vehicle_insurance_company!=='Other'" tabindex="74" />
+                    <datalist id="insurance-company" class="insurance-company" ng-model="current_job.vehicle_insurance_company" ng-if="current_job.vehicle_insurance_company!=='Other'">
+                      <option>All State</option>
+                      <option>Geico</option>
+                      <option>Esurance</option>
+                      <option>State Farm</option>
+                      <option>Progressive</option>
+                      <option>Other</option>
+                    </datalist>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.vehicle_insurance_company_text" ng-if="current_job.vehicle_insurance_company==='Other'">
+                  </div>
+                  <div class="form-group form_radio">
+                    <label>Lease cancellation</label>
+                    <div class="radio_cont">
+                      <input name="cancellation" id="cancellation_yes" type="radio" ng-value="true" ng-model="current_job.vehicle_lease_cancellation" />
+                      <label for="cancellation_yes"><span></span>Yes</label>
+                      <input name="cancellation" id="cancellation_no" type="radio" ng-value="false" ng-model="current_job.vehicle_lease_cancellation" />
+                      <label for="cancellation_no"><span></span>No</label>
+                    </div>
+                  </div>
+                </div>
+                <!--THIRD ROW-->
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label>Reg State</label>
+                    <input class="form-control" list="reg-state" ng-init="current_job.vehicle_reg_state" ng-model="current_job.vehicle_reg_state" tabindex="57" />
+                    <datalist id="reg-state" ng-init="current_job.vehicle_reg_state" ng-model="current_job.vehicle_reg_state">
+                      <option value="CT">CT</option>
+                      <option value="NJ">NJ</option>
+                      <option value="NY">NY</option>
+                    </datalist>
+                  </div>
+                  <div class="form-group">
+                    <label>Year</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.vehicle_year" tabindex="60">
+                  </div>
+                  <div class="form-group">
+                    <label>Color</label>
+                    <input class="form-control" list="veh-color" ng-model="current_job.vehicle_color" tabindex="64">
+                    <datalist id="veh-color" ng-model="current_job.vehicle_color">
+                      <option>Black</option>
+                      <option>Blue</option>
+                      <option>Burgundy</option>
+                      <option>Green</option>
+                      <option>Orange</option>
+                      <option>Red</option>
+                      <option>White</option>
+                      <option>Grey</option>
+                    </datalist>
+                  </div>
+                  <!-- <div class="form-group">
+                    <label>Emission cert. number</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.vehicle_emission_cert_number" tabindex="68">
+                  </div> -->
+                  <div class="form-group">
+                    <label>Tax Rate</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.vehicle_tax_rate" tabindex="72">
+                  </div>
+                  <div class="form-group">
+                    <label>Insurance policy number</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.vehicle_insurance_policy_number" tabindex="75">
+                  </div>
+                  <div class="form-group date">
+                    <label>Date lease cancelled</label>
+                    <input type="text" format-date-model ng-model="current_job.vehicle_lease_cancel_date" uib-datepicker-popup="{{dateFormat}}" is-open="jobDatePickers.vehicle_lease_cancel_date.opened" datepicker-options="dateOptions" class="form-control" placeholder="MM/DD/YYYY" close-text="Close" />
+                    <button type="button" class="date_picker" ng-click="openDatePicker('vehicle_lease_cancel_date')"><i class="glyphicon glyphicon-calendar" tabindex="78"></i></button>
+                  </div>
+                </div>
+                <!--FOURTH ROW-->
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group date">
+                    <label>Vehicle purchase date</label>
+                    <input type="text" format-date-model ng-model="current_job.vehicle_purchase_date" uib-datepicker-popup="{{dateFormat}}" is-open="jobDatePickers.vehicle_purchase_date.opened" datepicker-options="dateOptions" class="form-control" placeholder="MM/DD/YYYY" close-text="Close" tabindex="58" />
+                    <button type="button" class="date_picker" ng-click="openDatePicker('vehicle_purchase_date')"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </div>
+                  <div class="form-group">
+                    <label>Body style</label>
+                    <input class="form-control" list="body-style" ng-model="current_job.vehicle_body_style" tabindex="61" />
+                    <datalist id="body-style" ng-model="current_job.vehicle_body_style">
+                      <option>2DrCoup</option>
+                      <option>3door</option>
+                      <option>4door</option>
+                      <option>4doorsedan</option>
+                      <option>suv</option>
+                    </datalist>
+                  </div>
+                  <div class="form-group">
+                    <label>Axles</label>
+                    <input class="form-control" list="veh-axles" ng-model="current_job.vehicle_axles" number-model-to-string tabindex="65" />
+                    <datalist id="veh-axles" ng-model="current_job.vehicle_axles" number-model-to-string>
+                      <option value="2">2</option>
+                      <option value="4">4</option>
+                      <option value="6">6</option>
+                      <option value="8">8</option>
+                      <option value="10">10</option>
+                      <option value="12">12</option>
+                    </datalist>
+                  </div>
+                  <div class="form-group">
+                    <label>Odometer reading</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.vehicle_odometer" tabindex="69">
+                  </div>
+                  <div class="form-group">
+                    <label>Tax</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.vehicle_tax" tabindex="73">
+                  </div>
+                  <div class="form-group date">
+                    <label>Lease sign date</label>
+                    <input type="text" format-date-model ng-model="current_job.vehicle_lease_sign_date" uib-datepicker-popup="{{dateFormat}}" is-open="jobDatePickers.vehicle_lease_sign_date.opened" datepicker-options="dateOptions" class="form-control" placeholder="MM/DD/YYYY" close-text="Close" tabindex="76" />
+                    <button type="button" class="date_picker" ng-click="openDatePicker('vehicle_lease_sign_date')"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <div class="text-center">
+                <button type="submit" class="btn_red">Save</button>
+              </div>
+            </form>
+          </div>
+          <!--EPA TAB-->
+          <div role="tabpanel" class="tab-pane fade" id="epa">
+            <form class="job_form" ng-submit="formSubmitted('job')">
+              <div class="row">
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label>Average EPA</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.epa_average">
+                  </div>
+                </div>
+                <!--SECOND ROW-->
+                <div class="col-xs-12 col-md-3">
+                  <div class="form-group">
+                    <label>Average EPA MPG rating over 40</label>
+                    <input type="text" class="form-control" placeholder="" ng-model="current_job.epa_rating_over_40">
+                  </div>
+                </div>
+                <div class="col-xs-12 col-md-offset-1 col-md-3">
+                  <div class="form-group form_radio">
+                    <label>Zero emissions</label>
+                    <div class="radio_cont">
+                      <input name="zero_emissions" id="zero_emissions_yes" type="radio" ng-value="true" ng-model="current_job.epa_zero_emissions" />
+                      <label for="zero_emissions_yes"><span></span>Yes</label>
+                      <input name="zero_emissions" id="zero_emissions_no" type="radio" ng-value="false" ng-model="current_job.epa_zero_emissions" />
+                      <label for="zero_emissions_no"><span></span>No</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--row-->
+              <!--ONE LINE RADIO BUTTONS-->
+              <div class="row">
+                <div class="form-group form_radio one_line">
+                  <div class="col-xs-12 col-md-8 col-lg-7 pr0">
+                    <label>Is the gross sales/lease price of the vehicle equal to or greater than $45,000.00?</label>
+                  </div>
+                  <div class="col-xs-12 col-md-3">
+                    <div class="radio_cont">
+                      <input name="price1" id="price1_yes" type="radio" ng-value="true" ng-model="current_job.epa_question_1" />
+                      <label for="price1_yes"><span></span>Yes</label>
+                      <input name="price1" id="price1_no" type="radio" ng-value="false" ng-model="current_job.epa_question_1" />
+                      <label for="price1_no"><span></span>No</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group form_radio one_line">
+                  <div class="col-xs-12 col-md-8 col-lg-7 pr0">
+                    <label>Commercial Vehicle?</label>
+                  </div>
+                  <div class="col-xs-12 col-md-3">
+                    <div class="radio_cont">
+                      <input name="price1" id="price1_yes" type="radio" ng-value="true" ng-model="current_job.commercial_yes" />
+                      <label for="price1_yes"><span></span>Yes</label>
+                      <input name="price1" id="price1_no" type="radio" ng-value="false" ng-model="current_job.commercial_no" />
+                      <label for="price1_no"><span></span>No</label>
+                    </div>
+                  </div>
+                </div>
+                <!--SECOND ROW-->
+                <div class="form-group form_radio one_line">
+                  <div class="col-xs-12 col-md-8 col-lg-7 pr0">
+                    <label>Is Average EPA MGP rating less than 40 with gross sales/lease price equal to or greater than $45,000?</label>
+                  </div>
+                  <div class="col-xs-12 col-md-3">
+                    <div class="radio_cont">
+                      <input name="price2" id="price2_yes" type="radio" ng-value="true" ng-model="current_job.epa_question_2" />
+                      <label for="price2_yes"><span></span>Yes</label>
+                      <input name="price2" id="price2_no" type="radio" ng-value="false" ng-model="current_job.epa_question_2" />
+                      <label for="price2_no"><span></span>No</label>
+                    </div>
+                  </div>
+                </div>
+                <!--THIRD ROW-->
+                <div class="form-group form_radio one_line">
+                  <div class="col-xs-12 col-md-8 col-lg-7 pr0">
+                    <label>Is the average EPA MPG rating less than 19 with a gross sales/lease price of less than $45,0000?</label>
+                  </div>
+                  <div class="col-xs-12 col-md-3">
+                    <div class="radio_cont">
+                      <input name="price3" id="price3_yes" type="radio" ng-value="true" ng-model="current_job.epa_question_3" />
+                      <label for="price3_yes"><span></span>Yes</label>
+                      <input name="price3" id="price3_no" type="radio" ng-value="false" ng-model="current_job.epa_question_3" />
+                      <label for="price3_no"><span></span>No</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <div class="text-center">
+                <button type="submit" class="btn_red">Save</button>
+              </div>
+            </form>
+          </div>
+          <!--lienS TAB-->
+          <div role="tabpanel" class="tab-pane fade" id="liens">
+            <ng-include src="'/partials/corps-table.html'"></ng-include>
+            <ng-include src="'/partials/corp-details.html'"></ng-include>
+          </div>
+          <!--FORMS TAB-->
+          <div role="tabpanel" class="tab-pane fade" id="forms">
+            <form class="job_form">
+              <div class="row buttons_row">
+                <div class="col-sm-12 m-t-30">
+                  <div class="col-sm-4">
+                    <a class=" btn btn_red_invert pdf disabled" target="_blank" href="/pdfs/Certificate-of-Ownership-{{current_job._id}}.pdf">Certificate of Ownership</a>
+                  </div>
+                  <div class="col-sm-4">
+                    <a class=" btn btn_red_invert pdf disabled" target="_blank" href="/pdfs/BA-49-Front-{{current_job._id}}.pdf">BA 49 Front</a>
+                  </div>
+                  <div class="col-sm-4">
+                    <a class=" btn btn_red_invert pdf disabled" target="_blank" href="/pdfs/BA-49-Back-{{current_job._id}}.pdf">BA 49 Back</a>
+                  </div>
+                </div>
+                <div class="col-sm-12 m-t-30">
+                  <div class="col-sm-4">
+                    <a class=" btn btn_red_invert pdf disabled" target="_blank" href="/pdfs/Application-Certificate-Ownership-New-Vehicle-{{current_job._id}}.pdf">Certificate of Ownership - New Vehicle</a>
+                  </div>
+                  <div class="col-sm-4">
+                    <a class=" btn btn_red_invert pdf disabled" target="_blank" href="/pdfs/Financing-Statement-{{current_job._id}}.pdf">Financing Statement</a>
+                  </div>
+                  <div class="col-sm-4">
+                    <a class=" btn btn_red_invert pdf disabled" target="_blank" href="/pdfs/Vehicle-Correction-{{current_job._id}}.pdf">Vehicle Correction</a>
+                  </div>
+                </div>
+                <div class="col-sm-12 m-t-30">
+                  <div class="col-sm-4">
+                    <a class=" btn btn_red_invert pdf disabled" target="_blank" href="/pdfs/Application-Duplicate-Certificate-{{current_job._id}}.pdf">Duplicate Certificate</a>
+                  </div>
+              
+                  <div class="col-sm-4">
+                    <a class=" btn btn_red_invert pdf disabled" target="_blank" href="/pdfs/Universal-{{current_job._id}}.pdf">Universal Form</a>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <div class="text-center">
+                <button type="submit" class="btn_red">Save</button>
+              </div>
+            </form>
+          </div>
+          <!--TRACK TAB-->
+          <div role="tabpanel" class="tab-pane fade" id="tracking">
+            <p ng-repeat="note in current_job.notes_collection" class="m-b-20">
+              <strong>Note created by: </strong>{{note.created_by}} on {{note.created_on}}
+              <br/>{{note.note}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

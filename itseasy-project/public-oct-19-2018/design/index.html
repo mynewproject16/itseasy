@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <meta property="og:site_name" content="ItsEasy">
+    <meta property="og:title" content="ItsEasy">
+    <meta property="og:url" content="http://#/">
+    <meta property="og:image" content="http://#/ItsEasy.png">
+    <!--<meta property="fb:app_id" content="Facebook">-->
+    <meta property="og:description" content="Description...">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <title>ItsEasy</title>
+
+    <!--<link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png">-->
+    <!--<link rel="apple-touch-icon" sizes="60x60" href="apple-icon-60x60.png">-->
+    <!--<link rel="apple-touch-icon" sizes="72x72" href="apple-icon-72x72.png">-->
+    <!--<link rel="apple-touch-icon" sizes="76x76" href="apple-icon-76x76.png">-->
+    <!--<link rel="apple-touch-icon" sizes="114x114" href="apple-icon-114x114.png">-->
+    <!--<link rel="apple-touch-icon" sizes="120x120" href="apple-icon-120x120.png">-->
+    <!--<link rel="apple-touch-icon" sizes="144x144" href="apple-icon-144x144.png">-->
+    <!--<link rel="apple-touch-icon" sizes="152x152" href="apple-icon-152x152.png">-->
+    <!--<link rel="apple-touch-icon" sizes="180x180" href="apple-icon-180x180.png">-->
+    <!--<link rel="icon" type="image/png" sizes="192x192"  href="android-icon-192x192.png">-->
+    <!--<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">-->
+    <!--<link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">-->
+    <!--<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">-->
+    <!--<link rel="manifest" href="manifest.json">-->
+    <!--<meta name="msapplication-TileColor" content="#ffffff">-->
+    <!--<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">-->
+    <!--<meta name="theme-color" content="#ffffff">-->
+
+    <!-- Your CSS -->
+
+    <link href="https://fonts.googleapis.com/css?family=News+Cycle:400,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/itseasy.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+
+<!-- Preloader -->
+<!--<div id="preloader"></div>-->
+
+<div id="back"></div> <!--div for back to top button-->
+
+
+<header class="container-fluid header_container">
+
+
+    <a class="hidden-lg menu_button menu sb-toggle-left" href="#"><span></span></a>
+
+    <a class="logo_nav pull-left" href="index.html">
+        <img class="img-responsive" src="images/logo.png" alt="logo">
+        ItsEasy Passport & Visa
+    </a>
+
+    <div class="container">
+        <ul class="text-center">
+            <li><a class="active" href="index.html" title="jobs">
+                <!--<i class="iconS-Briefcase-2"></i>-->
+                jobs</a></li>
+            <li><a href="dealerships.html" title="dealerships">
+                <!--<i class="iconS-Handshake"></i>-->
+                dealerships</a></li>
+            <li><a href="corporations.html" title="corporations">
+                <!--<i class="iconS-Networking-2"></i>-->
+                corporations</a></li>
+        </ul>
+
+    </div>
+
+    <div class="jobs_wrapper">
+        <h1 class="main_title">lorem ipsum...</h1>
+    </div>
+
+</header>
+
+<div class="container-fluid">
+
+
+<div class="row">
+
+<div class="jobs_wrapper">
+
+
+    <div class="job_tabs">
+
+    <!-- TAB BUTTONS -->
+    <ul id="job_tabs" class="nav nav-tabs" role="tablist">
+        <li class="col-xs-12 col-sm-4 active"><a href="#jobs_table" aria-controls="jobs_table" role="tab" data-toggle="tab">Jobs Table</a></li>
+
+        <li class="col-xs-12 col-sm-4"><a href="#job_detail" aria-controls="job_detail" role="tab" data-toggle="tab">Job Details</a></li>
+
+        <li class="col-xs-12 col-sm-4"><a href="#quick_job" aria-controls="quick_job" role="tab" data-toggle="tab">Quick Job</a></li>
+    </ul>
+
+    <!-- TAB CONTENT -->
+    <div class="tab-content">
+
+        <!--JOBS TABLE-->
+        <div role="tabpanel" class="tab-pane fade in active" id="jobs_table">
+
+            <div class="text-right entries_container">
+                show
+                <select name="entries" id="entries">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+                entries
+
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>VIN NUMBER</th>
+                        <th>DEALER NAME</th>
+                        <th>LAST NAME</th>
+                        <th>COMPANY</th>
+                        <th>DATE</th>
+                        <th>DATE SENT</th>
+                        <th>STATE</th>
+                        <th>STATUS</th>
+                        <th>LEASE/BUY</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td>
+                        <!--<label class="table_checkbox">-->
+                            <!--<input type="checkbox">-->
+                        <!--</label>-->
+                            TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                    </tr>
+                    <tr>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                    </tr>
+                    <tr>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                    </tr>
+                    <tr>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                    </tr>
+                    <tr>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                    </tr>
+                    <tr>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                    </tr>
+                    <tr>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                    </tr>
+                    <tr>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                    </tr>
+                    <tr>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                    </tr>
+                    <tr>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                        <td>TEST</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+           <div class="text-center">
+
+               <button class="btn_red btn_search" type="button"><i class="glyphicon glyphicon-search" aria-hidden="true"></i>search</button>
+
+               <div class="pull-right entries_nbr">Showing <span>10</span> of <span>24</span> entries</div>
+
+           </div>
+
+            <div class="search_block">
+
+                <div class="input_container">
+                    <input placeholder="search by vin" type="text">
+                    <input placeholder="search by dealer name" type="text">
+                    <input placeholder="search by last name" type="text">
+                    <input placeholder="search by company" type="text">
+                    <input placeholder="search by date" type="text">
+                    <input placeholder="search by date sent" type="text">
+                    <input placeholder="search by state" type="text">
+                    <input placeholder="search by status" type="text">
+                    <input placeholder="search by lease/buy" type="text">
+                </div>
+
+
+
+                <nav class="pull-right">
+                    <ul class="pager">
+                        <li><a href="#"><i class="iconL-Left-2"></i> Prev</a></li>
+                        <li><a href="#">Next <i class="iconL-Right-2"></i></a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="text-center btn_container">
+                <button class="btn_red_invert" type="button">new job</button>
+                <button class="btn_red_invert" type="button">edit job</button>
+                <button class="btn_red_invert" type="button">delete job</button>
+            </div>
+
+
+        </div>
+
+
+        <!--JOB DETAILS-->
+        <div role="tabpanel" class="tab-pane fade" id="job_detail">
+
+            <!-- JOB DETAILS TAB BUTTONS -->
+            <ul id="job_details" class="nav nav-tabs">
+                <li class="active"><a href="#information" aria-controls="information" role="tab" data-toggle="tab">information</a></li>
+
+                <li class=""><a href="#dealer" aria-controls="dealer" role="tab" data-toggle="tab">dealer</a></li>
+
+                <li class=""><a href="#seller" aria-controls="seller" role="tab" data-toggle="tab">seller</a></li>
+
+                <li class=""><a href="#lessor" aria-controls="lessor" role="tab" data-toggle="tab">lessor</a></li>
+
+                <li class=""><a href="#lessee" aria-controls="lessee" role="tab" data-toggle="tab">lessee</a></li>
+
+                <li class=""><a href="#co_owner" aria-controls="co_owner" role="tab" data-toggle="tab">co owner</a></li>
+
+                <li class=""><a href="#vehicle" aria-controls="vehicle" role="tab" data-toggle="tab">vehicle</a></li>
+
+                <li class=""><a href="#epa" aria-controls="epa" role="tab" data-toggle="tab">epa</a></li>
+
+                <li class=""><a href="#liens" aria-controls="liens" role="tab" data-toggle="tab">liens</a></li>
+
+                <li class=""><a href="#forms" aria-controls="forms" role="tab" data-toggle="tab">forms</a></li>
+
+                <li class=""><a href="#tracking" aria-controls="tracking" role="tab" data-toggle="tab">tracking</a></li>
+            </ul>
+
+            <!-- JOB DETAILS TAB CONTENT -->
+        <div class="tab-content">
+
+            <!--INFORMATION TAB-->
+            <div role="tabpanel" class="tab-pane active fade in" id="information">
+
+                   <form class="job_form">
+                       <div class="row">
+                       <div class="col-xs-12 col-md-3">
+
+                           <div class="form-group">
+                               <label>Date</label>
+                               <input type="date" class="form-control" placeholder="MM/DD/YYYY">
+                           </div>
+
+                           <div class="form-group">
+                               <label>Date sent</label>
+                               <input type="date" class="form-control" placeholder="MM/DD/YYYY">
+                           </div>
+
+                           <div class="form-group">
+                               <label>Created by</label>
+                               <select class="form-control">
+                                   <option>lorem ipsum</option>
+                                   <option>lorem ipsum</option>
+                                   <option>lorem ipsum</option>
+                                   <option>lorem ipsum</option>
+                                   <option>lorem ipsum</option>
+                               </select>
+                           </div>
+
+                           <div class="form-group">
+                               <label>State</label>
+                               <select class="form-control">
+                                   <option>lorem ipsum</option>
+                                   <option>lorem ipsum</option>
+                                   <option>lorem ipsum</option>
+                                   <option>lorem ipsum</option>
+                                   <option>lorem ipsum</option>
+                               </select>
+                           </div>
+
+                       </div>
+
+                       <!--SECOND ROW RADIO-->
+
+                       <div class="col-xs-12 col-md-3">
+
+                           <div class="form-group form_radio">
+                               <label>Lease/Buy</label>
+                              <div class="radio_cont">
+
+                              <input name="lease_buy" id="lease" type="radio"/>
+                               <label for="lease"><span></span>Lease</label>
+
+                               <input name="lease_buy" id="buy" type="radio"/>
+                               <label for="buy"><span></span>Buy</label>
+
+                              </div>
+                           </div>
+
+                           <div class="form-group form_radio">
+                               <label>Rep pl</label>
+                              <div class="radio_cont">
+
+                              <input name="rep_pl" id="rep_yes" type="radio"/>
+                               <label for="rep_yes"><span></span>Yes</label>
+
+                               <input name="rep_pl" id="rep_no" type="radio"/>
+                               <label for="rep_no"><span></span>No</label>
+
+                              </div>
+                           </div>
+
+                           <div class="form-group form_radio">
+                               <label>Trans</label>
+                              <div class="radio_cont">
+
+                              <input name="trans" id="trans_yes" type="radio"/>
+                               <label for="trans_yes"><span></span>Yes</label>
+
+                               <input name="trans" id="trans_no" type="radio"/>
+                               <label for="trans_no"><span></span>No</label>
+
+                              </div>
+                           </div>
+
+
+                           <div class="form-group form_radio">
+                               <label>Hold</label>
+                              <div class="radio_cont">
+
+                              <input name="hold" id="hold_yes" type="radio"/>
+                               <label for="hold_yes"><span></span>Yes</label>
+
+                               <input name="hold" id="hold_no" type="radio"/>
+                               <label for="hold_no"><span></span>No</label>
+
+                              </div>
+                           </div>
+
+
+                       </div>
+
+                       <!--THIRD ROW RADIO-->
+
+                       <div class="col-xs-12 col-md-3">
+
+                           <div class="form-group form_radio">
+                               <label>Initial</label>
+                               <div class="radio_cont">
+
+                                   <input name="initial" id="initial_yes" type="radio"/>
+                                   <label for="initial_yes"><span></span>yes</label>
+
+                                   <input name="initial" id="initial_no" type="radio"/>
+                                   <label for="initial_no"><span></span>no</label>
+
+                               </div>
+                           </div>
+
+                           <div class="form-group form_radio">
+                               <label>Dupl</label>
+                               <div class="radio_cont">
+
+                                   <input name="dupl" id="dupl_yes" type="radio"/>
+                                   <label for="dupl_yes"><span></span>Yes</label>
+
+                                   <input name="dupl" id="dupl_no" type="radio"/>
+                                   <label for="dupl_no"><span></span>No</label>
+
+                               </div>
+                           </div>
+
+                           <div class="form-group form_radio">
+                               <label>Rental</label>
+                               <div class="radio_cont">
+
+                                   <input name="rental" id="rental_yes" type="radio"/>
+                                   <label for="rental_yes"><span></span>Yes</label>
+
+                                   <input name="rental" id="rental_no" type="radio"/>
+                                   <label for="rental_no"><span></span>No</label>
+
+                               </div>
+                           </div>
+
+
+                           <div class="form-group form_radio">
+                               <label>Job type</label>
+                               <div class="radio_cont">
+
+                                   <input name="job_type" id="sys" type="radio"/>
+                                   <label for="sys"><span></span>Sys</label>
+
+                                   <input name="job_type" id="non_sys" type="radio"/>
+                                   <label for="non_sys"><span></span>Non-sys</label>
+
+                               </div>
+                           </div>
+
+
+
+                       </div>
+
+
+                       <!--FOURTH ROW RADIO-->
+                       <div class="col-xs-12 col-md-3">
+                           <div class="form-group form_radio">
+                               <label>Renew</label>
+                               <div class="radio_cont">
+
+                                   <input name="renew" id="renew_yes" type="radio"/>
+                                   <label for="renew_yes"><span></span>Yes</label>
+
+                                   <input name="renew" id="renew_no" type="radio"/>
+                                   <label for="renew_no"><span></span>No</label>
+
+                               </div>
+                           </div>
+
+
+                           <div class="form-group form_radio">
+                               <label>Comm</label>
+                               <div class="radio_cont">
+
+                                   <input name="comm" id="comm_yes" type="radio"/>
+                                   <label for="comm_yes"><span></span>Yes</label>
+
+                                   <input name="comm" id="comm_no" type="radio"/>
+                                   <label for="comm_no"><span></span>No</label>
+
+                               </div>
+                           </div>
+
+                       </div>
+
+                       </div>
+
+                   <div class="row">
+
+                       <div class="col-xs-12 col-md-3">
+                           <div class="form-group">
+                               <label>Status</label>
+                               <select class="form-control">
+                                   <option>lorem ipsum</option>
+                                   <option>lorem ipsum</option>
+                                   <option>lorem ipsum</option>
+                                   <option>lorem ipsum</option>
+                                   <option>lorem ipsum</option>
+                               </select>
+                           </div>
+                       </div>
+
+                       <div class="col-xs-12 col-md-6">
+                           <div class="form-group pl_20">
+                               <label>Note</label>
+                               <textarea class="form-control" placeholder="add your note" id="" cols="30" rows="3"></textarea>
+                           </div>
+                       </div>
+
+                   </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn_red">send</button>
+                    </div>
+                </form>
+
+            </div>
+
+            <!--DEALER TAB-->
+            <div role="tabpanel" class="tab-pane fade" id="dealer">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias consequuntur hic impedit maxime minus molestias officiis pariatur quam quis repellendus sit, tempora voluptas voluptatem. Adipisci aliquam eaque maxime suscipit ullam?
+            </div>
+
+            <!--SELLER TAB-->
+            <div role="tabpanel" class="tab-pane fade" id="seller">
+
+                <form class="job_form">
+                    <div class="row">
+
+                        <div class="col-xs-12 col-md-3">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>State</label>
+                                <select class="form-control">
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!--SECOND ROW-->
+
+                        <div class="col-xs-12 col-md-3">
+
+                            <div class="form-group">
+                                <label>Address 1</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Zip code</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                        </div>
+
+                        <!--THIRD ROW-->
+
+                        <div class="col-xs-12 col-md-3">
+
+                            <div class="form-group">
+                                <label>Address 2</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Seller corp code</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                        </div>
+
+                        <!--FOURTH ROW-->
+                        <div class="col-xs-12 col-md-3">
+
+                            <div class="form-group">
+                                <label>City</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+
+                            <div class="form-group form_radio">
+                                <label>Seller same as dealer</label>
+                                <div class="radio_cont">
+
+                                    <input name="same" id="same_yes" type="radio"/>
+                                    <label for="same_yes"><span></span>Yes</label>
+
+                                    <input name="same" id="same_no" type="radio"/>
+                                    <label for="same_no"><span></span>No</label>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn_red">send</button>
+                    </div>
+                </form>
+
+            </div>
+
+            <!--LESSOR TAB-->
+            <div role="tabpanel" class="tab-pane fade" id="lessor">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias consequuntur hic impedit maxime minus molestias officiis pariatur quam quis repellendus sit, tempora voluptas voluptatem. Adipisci aliquam eaque maxime suscipit ullam?
+            </div>
+
+            <!--LESSEE TAB-->
+            <div role="tabpanel" class="tab-pane fade" id="lessee">
+                <form class="job_form">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-3">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Address 1</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Zip code</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                        </div>
+
+                        <!--SECOND ROW-->
+
+                        <div class="col-xs-12 col-md-3">
+
+                            <div class="form-group">
+                                <label>Middle name</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Address 2</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+
+                            <div class="form-group form_radio">
+                                <label>Mailing address same as above</label>
+                                <div class="radio_cont">
+
+                                    <input name="mailing" id="mailing_yes" type="radio"/>
+                                    <label for="mailing_yes"><span></span>Yes</label>
+
+                                    <input name="mailing" id="mailing_no" type="radio"/>
+                                    <label for="mailing_no"><span></span>No</label>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <!--THIRD ROW-->
+
+                        <div class="col-xs-12 col-md-3">
+
+                            <div class="form-group">
+                                <label>Last name</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>City</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                        </div>
+
+                        <!--FOURTH ROW-->
+                        <div class="col-xs-12 col-md-3">
+
+                            <div class="form-group">
+                                <label>Company</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>State</label>
+                                <select class="form-control">
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <p>Mailing address (if it's not the same, otherwise will be hidden)</p>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-3">
+                            <div class="form-group">
+                                <label>Mailing address 1</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Mailing Zip code</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                        </div>
+
+                        <!--SECOND ROW-->
+
+                        <div class="col-xs-12 col-md-3">
+
+                            <div class="form-group">
+                                <label>Mailing address 2</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                        </div>
+
+                        <!--THIRD ROW-->
+
+                        <div class="col-xs-12 col-md-3">
+
+                            <div class="form-group">
+                                <label>Mailing city</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+
+                        </div>
+
+                        <!--FOURTH ROW-->
+                        <div class="col-xs-12 col-md-3">
+
+                            <div class="form-group">
+                                <label>Mailing State</label>
+                                <select class="form-control">
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-3">
+
+                            <div class="form-group form_radio">
+                                <label>Sex</label>
+                                <div class="radio_cont">
+                                    <input name="sex" id="sex_male" type="radio"/>
+                                    <label for="sex_male"><span></span>Male</label>
+
+                                    <input name="sex" id="sex_female" type="radio"/>
+                                    <label for="sex_female"><span></span>Female</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Corp code</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Violation</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                        </div>
+
+                        <!--SECOND ROW-->
+
+                        <div class="col-xs-12 col-md-3">
+
+                            <div class="form-group">
+                                <label>Date of birth</label>
+                                <input type="date" class="form-control" placeholder="MM/DD/YYYY">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Social security number</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                        </div>
+
+                        <!--THIRD ROW-->
+
+                        <div class="col-xs-12 col-md-3">
+
+                            <div class="form-group">
+                                <label>Eye color</label>
+                                <select class="form-control">
+                                    <option>Brown</option>
+                                    <option>Blue</option>
+                                    <option>Black</option>
+                                    <option>Green</option>
+                                    <option>Hazel</option>
+                                    <option>Pink? :)</option>
+                                </select>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label>Fed tax ID number</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+
+                        </div>
+
+                        <!--FOURTH ROW-->
+                        <div class="col-xs-12 col-md-3">
+
+                            <div class="form-group">
+                                <label>Licence number</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>State of</label>
+                                <select class="form-control">
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn_red">send</button>
+                    </div>
+                </form>
+
+            </div>
+
+             <!--CO-OWNER TAB-->
+            <div role="tabpanel" class="tab-pane fade" id="co_owner">
+
+                <form class="job_form">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-3">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Address 1</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Zip code</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                        </div>
+
+                        <!--SECOND ROW-->
+
+                        <div class="col-xs-12 col-md-3">
+
+                            <div class="form-group">
+                                <label>Middle name</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Address 2</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+
+                            <div class="form-group form_radio">
+                                <label>Mailing address same as above</label>
+                                <div class="radio_cont">
+
+                                    <input name="mailing2" id="mailing2_yes" type="radio"/>
+                                    <label for="mailing2_yes"><span></span>Yes</label>
+
+                                    <input name="mailing2" id="mailing2_no" type="radio"/>
+                                    <label for="mailing2_no"><span></span>No</label>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <!--THIRD ROW-->
+
+                        <div class="col-xs-12 col-md-3">
+
+                            <div class="form-group">
+                                <label>Last name</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>City</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                        </div>
+
+                        <!--FOURTH ROW-->
+                        <div class="col-xs-12 col-md-3">
+
+                            <div class="form-group">
+                                <label>Company</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>State</label>
+                                <select class="form-control">
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <p>Mailing address (if it's not the same, otherwise will be hidden)</p>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-3">
+                            <div class="form-group">
+                                <label>Mailing address 1</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Mailing Zip code</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                        </div>
+
+                        <!--SECOND ROW-->
+
+                        <div class="col-xs-12 col-md-3">
+
+                            <div class="form-group">
+                                <label>Mailing address 2</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                        </div>
+
+                        <!--THIRD ROW-->
+
+                        <div class="col-xs-12 col-md-3">
+
+                            <div class="form-group">
+                                <label>Mailing city</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+
+                        </div>
+
+                        <!--FOURTH ROW-->
+                        <div class="col-xs-12 col-md-3">
+
+                            <div class="form-group">
+                                <label>Mailing State</label>
+                                <select class="form-control">
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-3">
+
+                            <div class="form-group form_radio">
+                                <label>Sex</label>
+                                <div class="radio_cont">
+                                    <input name="sex2" id="sex2_male" type="radio"/>
+                                    <label for="sex2_male"><span></span>Male</label>
+
+                                    <input name="sex2" id="sex2_female" type="radio"/>
+                                    <label for="sex2_female"><span></span>Female</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Corp code</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+
+                        </div>
+
+                        <!--SECOND ROW-->
+
+                        <div class="col-xs-12 col-md-3">
+
+                            <div class="form-group">
+                                <label>Date of birth</label>
+                                <input type="date" class="form-control" placeholder="MM/DD/YYYY">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Social security number</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                        </div>
+
+                        <!--THIRD ROW-->
+
+                        <div class="col-xs-12 col-md-3">
+
+                            <div class="form-group">
+                                <label>Eye color</label>
+                                <select class="form-control">
+                                    <option>Brown</option>
+                                    <option>Blue</option>
+                                    <option>Black</option>
+                                    <option>Green</option>
+                                    <option>Hazel</option>
+                                    <option>Pink? :)</option>
+                                </select>
+                            </div>
+
+
+                        </div>
+
+                        <!--FOURTH ROW-->
+                        <div class="col-xs-12 col-md-3">
+
+                            <div class="form-group">
+                                <label>Licence number</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn_red">send</button>
+                    </div>
+                </form>
+
+            </div>
+
+            <!--VEHICLE TAB-->
+            <div role="tabpanel" class="tab-pane fade" id="vehicle">
+
+                <form class="job_form">
+                    <div class="row">
+
+                        <div class="col-xs-12 col-md-3">
+                            <div class="form-group">
+                                <label>Vin</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="form-group form_radio">
+                                <label>Status</label>
+                                <div class="radio_cont">
+
+                                    <input name="status" id="status_new" type="radio"/>
+                                    <label for="status_new"><span></span>New</label>
+
+                                    <input name="status" id="status_used" type="radio"/>
+                                    <label for="status_used"><span></span>Used</label>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Make</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Fuel type</label>
+                                <select class="form-control">
+                                    <option>CMF</option>
+                                    <option>Diesel</option>
+                                    <option>Elect</option>
+                                    <option>Gas</option>
+                                    <option>Hybrid</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Purchase Price</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="form-group form_radio">
+                                <label>Title/Registration</label>
+                                <div class="radio_cont">
+
+                                <input name="registration" id="instate" type="radio"/>
+                                <label for="instate"><span></span>Instate</label>
+
+                                <input name="registration" id="outofstate" type="radio"/>
+                                <label for="outofstate"><span></span>Outofstate</label>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Term of lease</label>
+                                <select class="form-control">
+                                    <option>12</option>
+                                    <option>24</option>
+                                    <option>36</option>
+                                    <option>48</option>
+                                    <option>52</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <!--SECOND ROW-->
+
+                        <div class="col-xs-12 col-md-3">
+
+                            <div class="form-group">
+                                <label>Plate</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Weight</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Model</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Cylinders</label>
+                                <select class="form-control">
+                                    <option>4</option>
+                                    <option>6</option>
+                                    <option>8</option>
+                                    <option>12</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Trade in</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Insurance Company</label>
+                                <select class="form-control">
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group form_radio">
+                                <label>Lease cancellation</label>
+                                <div class="radio_cont">
+                        <input name="cancellation" id="cancellation_yes" type="radio"/>
+                        <label for="cancellation_yes"><span></span>Yes</label>
+
+                        <input name="cancellation" id="cancellation_no" type="radio"/>
+                        <label for="cancellation_no"><span></span>No</label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!--THIRD ROW-->
+
+                        <div class="col-xs-12 col-md-3">
+
+                            <div class="form-group">
+                                <label>Reg State</label>
+                                <select class="form-control">
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                    <option>lorem ipsum</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Year</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Color</label>
+                                <select class="form-control">
+                                    <option>Black</option>
+                                    <option>Blue</option>
+                                    <option>Burgundy</option>
+                                    <option>Green</option>
+                                    <option>Orange</option>
+                                    <option>Red</option>
+                                    <option>White</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Emission cert. number</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Tax Rate</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+
+                            <div class="form-group">
+                                <label>Insurance policy number</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Date lease cancelled</label>
+                                <input type="date" class="form-control" placeholder="">
+                            </div>
+
+                        </div>
+
+                        <!--FOURTH ROW-->
+                        <div class="col-xs-12 col-md-3">
+
+                            <div class="form-group">
+                                <label>Vehicle purchase date</label>
+                                <input type="date" class="form-control" placeholder="">
+                            </div>
+
+
+                            <div class="form-group">
+                                <label>Body style</label>
+                                <select class="form-control">
+                                    <option>2DrCoup</option>
+                                    <option>3door</option>
+                                    <option>4door</option>
+                                    <option>4doorsedan</option>
+                                    <option>suv</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Axles</label>
+                                <select class="form-control">
+                                    <option>2</option>
+                                    <option>4</option>
+                                    <option>6</option>
+                                    <option>8</option>
+                                    <option>10</option>
+                                    <option>12</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Odometer reading</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Tax</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Lease sign date</label>
+                                <input type="date" class="form-control" placeholder="">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn_red">send</button>
+                    </div>
+                </form>
+
+            </div>
+
+            <!--EPA TAB-->
+            <div role="tabpanel" class="tab-pane fade" id="epa">
+
+                <form class="job_form">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-3">
+                            <div class="form-group">
+                                <label>Average EPA</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                        </div>
+
+                        <!--SECOND ROW-->
+
+                        <div class="col-xs-12 col-md-3">
+
+                            <div class="form-group">
+                                <label>Average EPA MPG rating over 40</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+
+                        </div>
+
+                        <div class="col-xs-12 col-md-offset-1 col-md-3">
+
+                            <div class="form-group form_radio">
+                                <label>Zero emissions</label>
+                                <div class="radio_cont">
+
+                                    <input name="zero_emissions" id="zero_emissions_yes" type="radio"/>
+                                    <label for="zero_emissions_yes"><span></span>Yes</label>
+
+                                    <input name="zero_emissions" id="zero_emissions_no" type="radio"/>
+                                    <label for="zero_emissions_no"><span></span>No</label>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!--row-->
+
+                    <!--ONE LINE RADIO BUTTONS-->
+
+                    <div class="row">
+                            <div class="form-group form_radio one_line">
+                               <div class="col-xs-12 col-md-8 col-lg-7 pr0">
+                                   <label>Is the gross sales/lease price of the vehicle equal to or greater than $45,000.00?</label>
+                               </div>
+                                <div class="col-xs-12 col-md-3">
+                                   <div class="radio_cont">
+                                    <input name="price1" id="price1_yes" type="radio"/>
+                                    <label for="price1_yes"><span></span>Yes</label>
+
+                                    <input name="price1" id="price1_no" type="radio"/>
+                                    <label for="price1_no"><span></span>No</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--SECOND ROW-->
+                            <div class="form-group form_radio one_line">
+                                <div class="col-xs-12 col-md-8 col-lg-7 pr0">
+                                    <label>Is Average EPA MGP rating less than 40 with gross sales/lease price equal to or greater than $45,000?</label>
+                                </div>
+
+                            <div class="col-xs-12 col-md-3">
+                                <div class="radio_cont">
+                                    <input name="price2" id="price2_yes" type="radio"/>
+                                    <label for="price2_yes"><span></span>Yes</label>
+
+                                    <input name="price2" id="price2_no" type="radio"/>
+                                    <label for="price2_no"><span></span>No</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--THIRD ROW-->
+
+
+
+                            <div class="form-group form_radio one_line">
+                                <div class="col-xs-12 col-md-8 col-lg-7 pr0">
+                                    <label>Is the average EPA MPG rating less than 19 with a gross sales/lease price of less than $45,0000?</label>
+                                </div>
+
+                            <div class="col-xs-12 col-md-3">
+                                <div class="radio_cont">
+                                    <input name="price3" id="price3_yes" type="radio"/>
+                                    <label for="price3_yes"><span></span>Yes</label>
+
+                                    <input name="price3" id="price3_no" type="radio"/>
+                                    <label for="price3_no"><span></span>No</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn_red">send</button>
+                    </div>
+                </form>
+
+            </div>
+
+            <!--LEINS TAB-->
+            <div role="tabpanel" class="tab-pane fade" id="liens">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias consequuntur hic impedit maxime minus molestias officiis pariatur quam quis repellendus sit, tempora voluptas voluptatem. Adipisci aliquam eaque maxime suscipit ullam?</div>
+
+            <!--FORMS TAB-->
+            <div role="tabpanel" class="tab-pane fade" id="forms">
+
+                <form class="job_form">
+                    <div class="row buttons_row">
+                        <div class="col-xs-12 col-md-3">
+
+                            <button type="submit" class="btn_red_invert">button 1</button>
+
+                        </div>
+
+                        <!--SECOND ROW-->
+
+                        <div class="col-xs-12 col-md-3">
+
+                            <button type="submit" class="btn_red_invert">button 2</button>
+
+                        </div>
+
+                        <!--THIRD ROW-->
+
+                        <div class="col-xs-12 col-md-3">
+
+                            <button type="submit" class="btn_red_invert">button 3</button>
+
+                        </div>
+
+                        <!--FOURTH ROW-->
+
+                        <div class="col-xs-12 col-md-3">
+
+                            <button type="submit" class="btn_red_invert">button 4</button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row buttons_row">
+                        <div class="col-xs-12 col-md-3">
+
+                            <button type="submit" class="btn_red_invert">button 1</button>
+
+                        </div>
+
+                        <!--SECOND ROW-->
+
+                        <div class="col-xs-12 col-md-3">
+
+                            <button type="submit" class="btn_red_invert">button 2</button>
+
+                        </div>
+
+                        <!--THIRD ROW-->
+
+                        <div class="col-xs-12 col-md-3">
+
+                            <button type="submit" class="btn_red_invert">button 3</button>
+
+                        </div>
+
+                        <!--FOURTH ROW-->
+
+                        <div class="col-xs-12 col-md-3">
+
+                            <button type="submit" class="btn_red_invert">button 4</button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn_red">send</button>
+                    </div>
+                </form>
+
+            </div>
+
+            <!--TRACK TAB-->
+            <div role="tabpanel" class="tab-pane fade" id="tracking">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias consequuntur hic impedit maxime minus molestias officiis pariatur quam quis repellendus sit, tempora voluptas voluptatem. Adipisci aliquam eaque maxime suscipit ullam?</div>
+
+        </div>
+
+        </div>
+
+
+
+        <!--QUICK JOB-->
+        <div role="tabpanel" class="tab-pane fade" id="quick_job">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias consequuntur hic impedit maxime minus molestias officiis pariatur quam quis repellendus sit, tempora voluptas voluptatem. Adipisci aliquam eaque maxime suscipit ullam?</div>
+
+     </div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+</div>
+
+
+<footer class="jobs_footer">
+    <div class="container">
+        <div class="row">
+            <a class="logo_footer pull-left" href="index.html">
+                <img class="img-responsive" src="images/logo.png" alt="logo">
+                ItsEasy Passport & Visa
+            </a>
+
+            <!--<ul>-->
+                <!--<li><i class="iconS-Map-Pin2"></i>address</li>-->
+                <!--<li><i class="iconS-Call"></i>phone</li>-->
+                <!--<li><i class="iconS-Mail"></i>email</li>-->
+            <!--</ul>-->
+
+            <a class="pull-right" href="index.html"><span>&copy;</span> ItsEasy 2017  |  All Rights Reserved</a>
+            </div>
+
+
+        </div>
+</footer>
+
+
+<div class="back_to_top">
+    <a href="#back"><i class="iconL-Up-3"></i></a>
+</div>
+
+<!-- external js -->
+
+
+<script src="js/itseasy.js"></script>
+
+
+
+
+ <!--Preloader-->
+
+<!--<script type="text/javascript">-->
+    <!--jQuery(document).ready(function($) {-->
+        <!--$(window).load(function(){-->
+            <!--$('#preloader').fadeOut('slow',function(){$(this).remove();});-->
+        <!--});-->
+    <!--});-->
+<!--</script>-->
+
+<script>
+    $('#job_tabs a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show')
+    });
+
+    $('#job_details a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show')
+    })
+</script>
+
+
+
+</body>
+</html>
